@@ -1,22 +1,31 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vistoria_cfc/src/pages/agenda/agenda_tab.dart';
 import 'package:vistoria_cfc/src/pages/base/controller/navigation_controller.dart';
 import 'package:vistoria_cfc/src/pages/home/Components/home_tab.dart';
-import 'package:vistoria_cfc/src/pages/profile/profile_tab.dart';
+import 'package:vistoria_cfc/src/pages/profile/view/profile_tab.dart';
 import 'package:vistoria_cfc/src/pages/vistoria/vistoria_tab.dart';
 
 class BaseScreen extends StatefulWidget {
-  const BaseScreen({super.key});
+  const BaseScreen({Key? key}) : super(key: key);
 
   @override
-  State<BaseScreen> createState() => _BaseScreenState();
+  _BaseScreenState createState() => _BaseScreenState();
 }
 
 class _BaseScreenState extends State<BaseScreen> {
-  int currentIndex = 0;
+  final RxInt currentIndex = 0.obs;
   final navigationController = Get.find<NavigationController>();
   final pageController = PageController();
+  late final _BaseScreenController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = _BaseScreenController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,19 +40,17 @@ class _BaseScreenState extends State<BaseScreen> {
           ProfileTab(),
         ],
       ),
-      bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          currentIndex: currentIndex,
+      bottomNavigationBar: GetBuilder<_BaseScreenController>(
+        init: controller,
+        builder: (_) => BottomNavigationBar(
+          currentIndex: controller.currentIndex.value,
           onTap: (index) {
-            setState(() {
-              currentIndex = index;
-              pageController.jumpToPage(index);
-              pageController.animateToPage(
-                index,
-                duration: const Duration(milliseconds: 800),
-                curve: Curves.easeInOutQuart,
-              );
-            });
+            controller.currentIndex(index);
+            pageController.animateToPage(
+              index,
+              duration: const Duration(milliseconds: 800),
+              curve: Curves.easeInOutQuart,
+            );
           },
           type: BottomNavigationBarType.fixed,
           backgroundColor: const Color.fromRGBO(38, 187, 55, 1.0),
@@ -70,5 +77,21 @@ class _BaseScreenState extends State<BaseScreen> {
         ),
       ),
     );
+  }
+}
+
+class _BaseScreenController extends GetxController {
+  final RxInt currentIndex = 0.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    // Executado quando o controller é inicializado
+  }
+
+  @override
+  void onClose() {
+    // Executado quando o controller é descartado
+    super.onClose();
   }
 }

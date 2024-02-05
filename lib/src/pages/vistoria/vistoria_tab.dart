@@ -9,28 +9,26 @@ class VistoriaTab extends StatefulWidget {
 
 class _VistoriaTab extends State<VistoriaTab> {
   final List<String> salas = [
-    // 'recepção',
-    // 'Diretor de Ensino e Geral',
-    // 'secretaria',
-    // 'instrutores'
+    'recepção',
+    'Diretor de Ensino e Geral',
+    'secretaria',
+    'instrutores'
   ];
   final List<String> banheiros = ['Masculino', 'Feminino'];
   final List<String> treinamento = [
-    // 'Televisão',
-    // 'DVD',
-    // 'retroprojetor',
-    // 'quadro branco 2m X 1,20m',
-    // 'tela p/ projeção',
-    // 'Acervo bibliográfico sobre trânsito(CTB)',
-    // 'Manuais e apostilas para os candidatos e condutores',
+    'Televisão',
+    'DVD',
+    'retroprojetor',
+    'quadro branco 2m X 1,20m',
+    'tela p/ projeção',
+    'Acervo bibliográfico sobre trânsito(CTB)',
+    'Manuais e apostilas para os candidatos e condutores',
   ];
   final List<String> deficientes = [
-    // 'Rampa de acesso para deficientes físicos',
-    // 'Banheiro deficiente físico'
+    'Rampa de acesso para deficientes físicos',
+    'Banheiro deficiente físico'
   ];
-  final List<String> suporte = [
-    // 'Bebedouro'
-  ];
+  final List<String> suporte = ['Bebedouro'];
 
   List<bool> selectedSalas = List.generate(4, (index) => false);
   List<bool> selectedBanheiros = List.generate(2, (index) => false);

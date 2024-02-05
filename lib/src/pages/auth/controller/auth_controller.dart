@@ -44,6 +44,32 @@ class AuthController extends GetxController {
     );
   }
 
+  Future<void> signIn({
+    required String username,
+    required String password,
+  }) async {
+    isLoading.value = true;
+
+    AuthResult result =
+        await authRepository.signIn(username: username, password: password);
+
+    isLoading.value = false;
+
+    result.when(
+      success: (user) {
+        this.user = user;
+
+        saveTokenAndProceedToBase();
+      },
+      error: (message) {
+        utilsServices.showToast(
+          message: message,
+          isError: true,
+        );
+      },
+    );
+  }
+
   Future<void> changePassword({
     required String currentPassword,
     required String newPassword,
@@ -99,32 +125,6 @@ class AuthController extends GetxController {
     isLoading.value = true;
 
     AuthResult result = await authRepository.signUp(user);
-
-    isLoading.value = false;
-
-    result.when(
-      success: (user) {
-        this.user = user;
-
-        saveTokenAndProceedToBase();
-      },
-      error: (message) {
-        utilsServices.showToast(
-          message: message,
-          isError: true,
-        );
-      },
-    );
-  }
-
-  Future<void> signIn({
-    required String username,
-    required String password,
-  }) async {
-    isLoading.value = true;
-
-    AuthResult result =
-        await authRepository.signIn(username: username, password: password);
 
     isLoading.value = false;
 

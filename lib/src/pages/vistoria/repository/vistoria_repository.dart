@@ -8,7 +8,7 @@ class VistoriaRepository {
 
   Future<HomeResult<VistoriaModel>> getAllVistorias() async {
     final result = await _HttpManager.restRequest(
-      url: Endpoints.vistoria,
+      url: Endpoints.centroFormacaoCondutores,
       method: HttpMethods.get,
     );
 

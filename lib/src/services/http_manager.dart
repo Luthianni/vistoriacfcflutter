@@ -14,16 +14,20 @@ class HttpManager {
     required String method,
     Map? headers,
     Map? body,
+    Map? token,
   }) async {
     final defaultHeaders = (headers?.cast<String, String>() ?? {})
       ..addAll({
         'content-type': 'application/json',
-        'accept': 'application/json',
+        if (token != null) 'authorization': 'Bearer $token',
       });
 
     Dio dio = Dio();
+    dio.options.headers = defaultHeaders;
 
     try {
+      print('Enviando requisição para $url');
+
       Response response = await dio.request(
         url,
         options: Options(
@@ -33,10 +37,14 @@ class HttpManager {
         data: body,
       );
 
+      print('Requisição bem-sucedida: ${response.data}');
+
       return response.data;
     } on DioError catch (error) {
+      print('Erro na requisição: ${error.message}');
       return error.response?.data ?? {};
     } catch (error) {
+      print('Erro desconhecido: $error');
       return {};
     }
   }

@@ -5,12 +5,13 @@ import 'package:vistoria_cfc/src/pages/vistoria/vistoria_tab.dart';
 import 'package:vistoria_cfc/src/services/utils_services.dart';
 
 class VistoriaScreen extends StatefulWidget {
-  VistoriaScreen({
+  const VistoriaScreen({
     Key? key,
     VistoriaModel? vistoria,
   }) : super(key: key);
 
-  final VistoriaModel vistoria = Get.arguments.isNullOrBlank;
+  // final VistoriaModel vistoria = Get.arguments.isNullOrBlank;
+  final VistoriaModel vistoria;
 
   @override
   State<VistoriaScreen> createState() => _VistoriaScreenState();
@@ -80,36 +81,36 @@ class _VistoriaScreenState extends State<VistoriaScreen> {
                                       height: 1.5, fontWeight: FontWeight.bold),
                                 ),
                               ),
-                              Text(
-                                "Endereço :"
-                                '${widget.vistoria.logradouro}',
-                                style: const TextStyle(
-                                    height: 1.5, fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                "Bairro :"
-                                '${widget.vistoria.bairro}',
-                                style: const TextStyle(
-                                    height: 1.5, fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                "Cidade :"
-                                '${widget.vistoria.cidade}',
-                                style: const TextStyle(
-                                    height: 1.5, fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                "Estado :"
-                                '${widget.vistoria.estado}',
-                                style: const TextStyle(
-                                    height: 1.5, fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                "Cep :"
-                                '${widget.vistoria.cep}',
-                                style: const TextStyle(
-                                    height: 1.5, fontWeight: FontWeight.bold),
-                              ),
+                              // Text(
+                              //   "Endereço :"
+                              //   '${widget.vistoria.logradouro}',
+                              //   style: const TextStyle(
+                              //       height: 1.5, fontWeight: FontWeight.bold),
+                              // ),
+                              // Text(
+                              //   "Bairro :"
+                              //   '${widget.vistoria.bairro}',
+                              //   style: const TextStyle(
+                              //       height: 1.5, fontWeight: FontWeight.bold),
+                              // ),
+                              // Text(
+                              //   "Cidade :"
+                              //   '${widget.vistoria.cidade}',
+                              //   style: const TextStyle(
+                              //       height: 1.5, fontWeight: FontWeight.bold),
+                              // ),
+                              // Text(
+                              //   "Estado :"
+                              //   '${widget.vistoria.estado}',
+                              //   style: const TextStyle(
+                              //       height: 1.5, fontWeight: FontWeight.bold),
+                              // ),
+                              // Text(
+                              //   "Cep :"
+                              //   '${widget.vistoria.cep}',
+                              //   style: const TextStyle(
+                              //       height: 1.5, fontWeight: FontWeight.bold),
+                              // ),
                             ],
                           ),
                         ),

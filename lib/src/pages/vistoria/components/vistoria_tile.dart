@@ -41,36 +41,43 @@ class VistoriaTile extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Agendamento: "
-                      '${vistoria.dataAgendamento} / ${vistoria.horaAgendada}',
+                      '${vistoria.cnpj}',
                       style: const TextStyle(
-                        fontSize: 14,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      "Endereço:\n "
-                      '${vistoria.logradouro}',
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      "Bairro: "
-                      '${vistoria.bairro}',
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      '${vistoria.cidade}, ${vistoria.estado}',
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    // Text(
+                    //   "Agendamento: "
+                    //   '${vistoria.dataAgendamento} / ${vistoria.horaAgendada}',
+                    //   style: const TextStyle(
+                    //     fontSize: 14,
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    // ),
+                    // Text(
+                    //   "Endereço:\n "
+                    //   '${vistoria.logradouro}',
+                    //   style: const TextStyle(
+                    //     fontSize: 14,
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    // ),
+                    // Text(
+                    //   "Bairro: "
+                    //   '${vistoria.bairro}',
+                    //   style: const TextStyle(
+                    //     fontSize: 14,
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    // ),
+                    // Text(
+                    //   '${vistoria.cidade}, ${vistoria.estado}',
+                    //   style: const TextStyle(
+                    //     fontSize: 14,
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

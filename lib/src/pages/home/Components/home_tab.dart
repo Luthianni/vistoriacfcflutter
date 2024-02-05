@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:vistoria_cfc/src/config/custom_colors.dart';
 import 'package:vistoria_cfc/src/models/vistoria_model.dart';
 import 'package:vistoria_cfc/src/pages/vistoria/components/vistoria_tile.dart';
-import 'package:vistoria_cfc/src/pages/vistoria/vistoria_screen.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({Key? key}) : super(key: key);
+
+  Future<List<VistoriaModel>> fetchData() async {
+    return [];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +65,7 @@ class HomeTab extends StatelessWidget {
         ),
         Expanded(
           child: FutureBuilder<List<VistoriaModel>>(
-            future: Future.value(),
+            future: fetchData(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
