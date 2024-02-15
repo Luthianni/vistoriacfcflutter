@@ -1,6 +1,6 @@
 String authErrorsString(String? code) {
   switch (code) {
-    case "INVALID_CREDENTIALS":
+    case "BAD_REQUEST":
       return 'Username e/ou senha inválidos';
 
     case 'Invalid session token':

@@ -9,11 +9,17 @@ abstract class HttpMethods {
 }
 
 class HttpManager {
+  late Dio _dio;
+
+  HttpManager() {
+    _dio = Dio();
+  }
+
   Future<Map> restRequest({
     required String url,
     required String method,
-    Map? headers,
-    Map? body,
+    Map<String, String>? headers,
+    Map<String, dynamic>? body,
     Map? token,
   }) async {
     final defaultHeaders = (headers?.cast<String, String>() ?? {})
@@ -22,13 +28,10 @@ class HttpManager {
         if (token != null) 'authorization': 'Bearer $token',
       });
 
-    Dio dio = Dio();
-    dio.options.headers = defaultHeaders;
-
     try {
       print('Enviando requisição para $url');
 
-      Response response = await dio.request(
+      Response response = await _dio.request(
         url,
         options: Options(
           headers: defaultHeaders,

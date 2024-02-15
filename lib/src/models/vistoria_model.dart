@@ -20,7 +20,7 @@ class VistoriaModel {
   });
 
   factory VistoriaModel.fromJson(Map<String, dynamic> json) =>
-      _$VistoriaModelfromJson(json);
+      _$VistoriaModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$VistoriaModelToJson(this);
 

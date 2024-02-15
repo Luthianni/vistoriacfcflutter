@@ -11,10 +11,10 @@ class AuthRepository {
   AuthResult handleUserOrError(Map<dynamic, dynamic> result) {
     if (result['result'] != null) {
       final user = UserModel.fromJson(result['result']);
-      return AuthResult.success(user);
+      return AuthResult.authSuccess(user);
     } else {
       print("Resposta de erro: $result");
-      return AuthResult.error(authErros.authErrorsString(result['error']));
+      return AuthResult.authError(authErros.authErrorsString(result['error']));
     }
   }
 
