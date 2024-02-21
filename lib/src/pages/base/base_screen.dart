@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vistoria_cfc/src/pages/agenda/agenda_tab.dart';
@@ -16,7 +14,6 @@ class BaseScreen extends StatefulWidget {
 }
 
 class _BaseScreenState extends State<BaseScreen> {
-  final RxInt currentIndex = 0.obs;
   final navigationController = Get.find<NavigationController>();
   final pageController = PageController();
   late final _BaseScreenController controller;
@@ -30,51 +27,59 @@ class _BaseScreenState extends State<BaseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: pageController,
-        children: const [
-          HomeTab(),
-          VistoriaTab(),
-          AgendaTab(),
-          ProfileTab(),
+      body: buildPageView(),
+      bottomNavigationBar: buildBottomNavigationBar(),
+    );
+  }
+
+  Widget buildPageView() {
+    return PageView(
+      physics: const NeverScrollableScrollPhysics(),
+      controller: pageController,
+      children: const [
+        HomeTab(),
+        VistoriaTab(),
+        AgendaTab(),
+        ProfileTab(),
+      ],
+    );
+  }
+
+  Widget buildBottomNavigationBar() {
+    return GetBuilder<_BaseScreenController>(
+      init: controller,
+      builder: (_) => BottomNavigationBar(
+        currentIndex: controller.currentIndex.value,
+        onTap: (index) {
+          controller.currentIndex(index);
+          pageController.animateToPage(
+            index,
+            duration: const Duration(milliseconds: 800),
+            curve: Curves.easeInOutQuart,
+          );
+        },
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: const Color.fromRGBO(38, 187, 55, 1.0),
+        selectedItemColor: const Color.fromRGBO(255, 255, 255, 1.0),
+        unselectedItemColor: const Color.fromRGBO(255, 255, 255, 0.392),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.article_outlined),
+            label: 'Vistorias',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.date_range_outlined),
+            label: 'Agenda',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_2_outlined),
+            label: 'Perfil',
+          ),
         ],
-      ),
-      bottomNavigationBar: GetBuilder<_BaseScreenController>(
-        init: controller,
-        builder: (_) => BottomNavigationBar(
-          currentIndex: controller.currentIndex.value,
-          onTap: (index) {
-            controller.currentIndex(index);
-            pageController.animateToPage(
-              index,
-              duration: const Duration(milliseconds: 800),
-              curve: Curves.easeInOutQuart,
-            );
-          },
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: const Color.fromRGBO(38, 187, 55, 1.0),
-          selectedItemColor: const Color.fromRGBO(255, 255, 255, 1.0),
-          unselectedItemColor: const Color.fromRGBO(255, 255, 255, 0.392),
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.article_outlined),
-              label: 'Vistorias',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.date_range_outlined),
-              label: 'Agenda',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_2_outlined),
-              label: 'Perfil',
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -82,12 +87,6 @@ class _BaseScreenState extends State<BaseScreen> {
 
 class _BaseScreenController extends GetxController {
   final RxInt currentIndex = 0.obs;
-
-  @override
-  void onInit() {
-    super.onInit();
-    // Executado quando o controller é inicializado
-  }
 
   @override
   void onClose() {

@@ -119,6 +119,7 @@ class SignInScreen extends StatelessWidget {
                           builder: (authController) {
                             return ElevatedButton(
                               style: ElevatedButton.styleFrom(
+                                backgroundColor: CustomColors.customSwatchColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18),
                                 ),
@@ -142,6 +143,7 @@ class SignInScreen extends StatelessWidget {
                                   : const Text(
                                       'Entrar',
                                       style: TextStyle(
+                                        color: Colors.white,
                                         fontSize: 18,
                                       ),
                                     ),

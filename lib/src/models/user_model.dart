@@ -6,14 +6,16 @@ part 'user_model.g.dart';
 class UserModel {
   String? username;
   String? password;
-  String? id;
+  dynamic id;
   String? token;
+  String? email;
 
   UserModel({
     this.username,
     this.password,
     this.id,
     this.token,
+    this.email,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
@@ -23,6 +25,6 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(username: $username, password: $password, id: $id, token: $token)';
+    return 'UserModel(username: $username, password: $password, id: $id, token: $token, email: $email)';
   }
 }

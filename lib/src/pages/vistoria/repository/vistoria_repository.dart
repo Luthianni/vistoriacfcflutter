@@ -4,10 +4,10 @@ import 'package:vistoria_cfc/src/pages/home/result/home_result.dart';
 import 'package:vistoria_cfc/src/services/http_manager.dart';
 
 class VistoriaRepository {
-  final HttpManager _HttpManager = HttpManager();
+  final HttpManager _httpManager = HttpManager();
 
   Future<HomeResult<VistoriaModel>> getAllVistorias() async {
-    final result = await _HttpManager.restRequest(
+    final result = await _httpManager.restRequest(
       url: Endpoints.centroFormacaoCondutores,
       method: HttpMethods.get,
     );

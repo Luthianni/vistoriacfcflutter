@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:logger/logger.dart';
 
 abstract class HttpMethods {
   static const String post = 'POST';
@@ -9,26 +10,34 @@ abstract class HttpMethods {
 }
 
 class HttpManager {
-  Future<Map> restRequest({
+  late Dio _dio;
+  final logger = Logger();
+
+  HttpManager() {
+    _initializeDio();
+  }
+
+  Future<void> _initializeDio() async {
+    _dio = Dio();
+  }
+
+  Future<Map<String, dynamic>> restRequest({
     required String url,
     required String method,
-    Map? headers,
-    Map? body,
-    Map? token,
+    Map<String, String>? headers,
+    Map<String, dynamic>? body,
+    String? token,
   }) async {
     final defaultHeaders = (headers?.cast<String, String>() ?? {})
       ..addAll({
         'content-type': 'application/json',
-        if (token != null) 'authorization': 'Bearer $token',
+        if (token != null) 'Authorization': 'Bearer $token',
       });
 
-    Dio dio = Dio();
-    dio.options.headers = defaultHeaders;
-
     try {
-      print('Enviando requisição para $url');
+      logger.i('Enviando requisição para $url');
 
-      Response response = await dio.request(
+      Response response = await _dio.request(
         url,
         options: Options(
           headers: defaultHeaders,
@@ -37,15 +46,19 @@ class HttpManager {
         data: body,
       );
 
-      print('Requisição bem-sucedida: ${response.data}');
+      logger.i('Requisição bem-sucedida: ${response.data}');
 
       return response.data;
     } on DioError catch (error) {
-      print('Erro na requisição: ${error.message}');
-      return error.response?.data ?? {};
+      logger.e('Erro na requisição: ${error.message}');
+      return Future.value(error.response?.data ?? {});
     } catch (error) {
-      print('Erro desconhecido: $error');
+      logger.e('Erro desconhecido: $error');
       return {};
     }
+  }
+
+  void dispose() {
+    _dio.close();
   }
 }

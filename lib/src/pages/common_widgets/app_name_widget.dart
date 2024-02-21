@@ -18,26 +18,5 @@ class AppNameWidget extends StatelessWidget {
         Image.asset('assets/fundo_device.png', fit: BoxFit.cover),
       ],
     );
-    // Text.rich(
-    //   TextSpan(
-    //     style: TextStyle(
-    //       fontSize: textSize,
-    //     ),
-    //     children: [
-    //       TextSpan(
-    //         text: 'CRT',
-    //         style: TextStyle(
-    //           color: greenTitleColor ?? CustomColors.customSwatchColor,
-    //         ),
-    //       ),
-    //       TextSpan(
-    //         text: 'Vistoria',
-    //         style: TextStyle(
-    //           color: CustomColors.customContrastColor,
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 }
