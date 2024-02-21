@@ -34,13 +34,13 @@ class AuthController extends GetxController {
     AuthResult result = await authRepository.validateToken(token);
 
     result.when(
-      success: (user) {
+      authSuccess: (user) {
         utilsServices.saveLocalData(key: StorageKeys.token, data: user.token!);
         this.user = user;
 
         saveTokenAndProceedToBase();
       },
-      error: (message) {
+      authError: (message) {
         signOut();
       },
     );
@@ -58,12 +58,12 @@ class AuthController extends GetxController {
     isLoading.value = false;
 
     result.when(
-      success: (user) {
+      authSuccess: (user) {
         this.user = user;
 
         saveTokenAndProceedToBase();
       },
-      error: (message) {
+      authError: (message) {
         utilsServices.showToast(
           message: message,
           isError: true,
@@ -124,11 +124,11 @@ class AuthController extends GetxController {
     isLoading.value = false;
 
     result.when(
-      success: (user) {
+      authSuccess: (user) {
         this.user = user;
         saveTokenAndProceedToBase();
       },
-      error: (message) {
+      authError: (message) {
         utilsServices.showToast(
           message: message,
           isError: true,
