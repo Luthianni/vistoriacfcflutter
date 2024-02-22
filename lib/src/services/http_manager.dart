@@ -11,14 +11,38 @@ abstract class HttpMethods {
 
 class HttpManager {
   late Dio _dio;
+
   final logger = Logger();
 
   HttpManager() {
     _initializeDio();
   }
 
-  Future<void> _initializeDio() async {
+  void _initializeDio() {
+    // Inicialize o Dio
     _dio = Dio();
+
+    // Adicione interceptadores ao Dio
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          // Interceptador executado antes da requisição ser enviada
+          logger.i('Interceptador: Antes da requisição - ${options.uri}');
+          return handler.next(options);
+        },
+        onResponse: (response, handler) {
+          // Interceptador executado após a resposta ser recebida
+          logger.i(
+              'Interceptador: Após a resposta - ${response.requestOptions.uri}');
+          return handler.next(response);
+        },
+        onError: (DioError e, handler) {
+          // Interceptador executado em caso de erro
+          logger.e('Interceptador de Erro: ${e.message}');
+          return handler.next(e);
+        },
+      ),
+    );
   }
 
   Future<Map<String, dynamic>> restRequest({
@@ -35,7 +59,7 @@ class HttpManager {
       });
 
     try {
-      logger.i('Enviando requisição para $url');
+      logger.w('Enviando requisição para $url');
 
       Response response = await _dio.request(
         url,

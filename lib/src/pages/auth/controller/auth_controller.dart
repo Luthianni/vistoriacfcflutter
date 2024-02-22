@@ -13,7 +13,7 @@ class AuthController extends GetxController {
   final utilsServices = UtilsServices();
   UserModel user = UserModel();
 
-  final logger = Logger(); // Crie uma instância de Logger
+  final logger = Logger();
 
   @override
   void onInit() {
@@ -34,13 +34,13 @@ class AuthController extends GetxController {
     AuthResult result = await authRepository.validateToken(token);
 
     result.when(
-      authSuccess: (user) {
+      success: (user) {
         utilsServices.saveLocalData(key: StorageKeys.token, data: user.token!);
         this.user = user;
 
         saveTokenAndProceedToBase();
       },
-      authError: (message) {
+      error: (message) {
         signOut();
       },
     );
@@ -58,12 +58,12 @@ class AuthController extends GetxController {
     isLoading.value = false;
 
     result.when(
-      authSuccess: (user) {
+      success: (user) {
         this.user = user;
 
         saveTokenAndProceedToBase();
       },
-      authError: (message) {
+      error: (message) {
         utilsServices.showToast(
           message: message,
           isError: true,
@@ -124,11 +124,11 @@ class AuthController extends GetxController {
     isLoading.value = false;
 
     result.when(
-      authSuccess: (user) {
+      success: (user) {
         this.user = user;
         saveTokenAndProceedToBase();
       },
-      authError: (message) {
+      error: (message) {
         utilsServices.showToast(
           message: message,
           isError: true,

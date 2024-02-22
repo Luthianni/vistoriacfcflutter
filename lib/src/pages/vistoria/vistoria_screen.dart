@@ -5,13 +5,12 @@ import 'package:vistoria_cfc/src/pages/vistoria/vistoria_tab.dart';
 import 'package:vistoria_cfc/src/services/utils_services.dart';
 
 class VistoriaScreen extends StatefulWidget {
-  const VistoriaScreen({
+  VistoriaScreen({
     Key? key,
     VistoriaModel? vistoria,
-  });
+  }) : super(key: key);
 
-  // final VistoriaModel vistoria = Get.arguments.isNullOrBlank;
-  final VistoriaModel vistoria;
+  final VistoriaModel? vistoria = Get.arguments.isNullOrBlank;
 
   @override
   State<VistoriaScreen> createState() => _VistoriaScreenState();

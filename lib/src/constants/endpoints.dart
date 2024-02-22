@@ -5,7 +5,8 @@ const String baseUrl = 'http://192.168.0.200:8080/api/v1';
 abstract class Endpoints {
   // AUTH //
   static const String signin = '$baseUrl/auth';
-  static const String validateToken = '$baseUrl/auth';
+  static const String validateToken = '$baseUrl/validateToken';
+  static const String signup = '$baseUrl/signup';
   static const String usuarios = '$baseUrl/usuarios';
   // SERVIDORES //
   static const String servidores = '$baseUrl/servidores';

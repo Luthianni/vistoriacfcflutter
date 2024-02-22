@@ -17,8 +17,7 @@ class AuthRepository {
       return AuthResult.success(user);
     } else {
       logger.d("Resposta do erro: $result");
-      return AuthResult.error(auth_errors
-          .authErrorsString(result['error'])); // <-- Alterado para snake_case
+      return AuthResult.error(auth_errors.authErrorsString(result['error']));
     }
   }
 
@@ -47,7 +46,7 @@ class AuthRepository {
       final result = await _httpManager.restRequest(
         url: Endpoints.validateToken,
         method: HttpMethods.post,
-        headers: {'token': token},
+        headers: {'Authorization': 'Bearer $token'},
       );
       logger.i('Recebendo a requisição da $HttpManager()');
       return handleUserOrError(result);
