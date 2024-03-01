@@ -48,7 +48,7 @@ class AuthRepository {
         method: HttpMethods.post,
         headers: {'Authorization': 'Bearer $token'},
       );
-      logger.i('Recebendo a requisição da $HttpManager()');
+      logger.i('Recebendo a requisição da $HttpManager(result)');
       return handleUserOrError(result);
     } on DioError catch (error) {
       if (error.response?.statusCode == 401) {

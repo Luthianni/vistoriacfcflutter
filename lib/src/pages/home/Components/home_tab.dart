@@ -17,21 +17,6 @@ class HomeTab extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        // title: const Text.rich(
-        //   TextSpan(
-        //     style: TextStyle(
-        //       fontSize: 30,
-        //     ),
-        //     children: [
-        //       TextSpan(
-        //         text: 'Vistoria Agendadas',
-        //         style: TextStyle(
-        //           color: Colors.green,
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
       ),
       body: Column(children: [
         Padding(

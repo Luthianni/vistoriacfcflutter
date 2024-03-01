@@ -1,5 +1,6 @@
 // CONNECTION BACK-END //
-const String baseUrl = 'http://192.168.0.200:8080/api/v1';
+//const String baseUrl = 'http://192.168.0.200:8080/api/v1';
+const String baseUrl = 'http://localhost:8080/api/v1';
 //const String baseUrl = 'http://172.25.137.54:8080/api/v1';
 
 abstract class Endpoints {

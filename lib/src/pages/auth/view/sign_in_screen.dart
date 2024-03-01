@@ -24,141 +24,155 @@ class SignInScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: CustomColors.customSwatchColor,
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: size.height,
-          width: size.width,
-          child: Column(
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/logo.png",
-                      height: 300,
-                      width: 300,
-                    ),
-                    const Text.rich(
-                      TextSpan(
-                        style: TextStyle(
-                          fontSize: 25,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: 'CRT Vistória',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
+      //backgroundColor: CustomColors.customSwatchColor,
+      body: Stack(children: [
+        Positioned.fill(
+          child: Image.asset(
+            "assets/fundo_device.png",
+            fit: BoxFit.cover,
+          ),
+        ),
+        Positioned.fill(
+          child: Container(
+            color: Colors.green.shade300.withOpacity(0.5),
+          ),
+        ),
+        SingleChildScrollView(
+          child: SizedBox(
+            height: size.height,
+            width: size.width,
+            child: Column(
+              children: [
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "assets/logo.png",
+                        height: 200,
+                        width: 200,
                       ),
-                    ),
-                    //Banner
-                    SizedBox(
-                      height: 30,
-                      child: DefaultTextStyle(
-                        style: const TextStyle(
-                          fontSize: 25,
-                        ),
-                        child: AnimatedTextKit(
-                          pause: Duration.zero,
-                          repeatForever: true,
-                          animatedTexts: [
-                            FadeAnimatedText('Confiabilidade'),
-                            FadeAnimatedText('Agilidade'),
-                            FadeAnimatedText('Rapidez'),
+                      const Text.rich(
+                        TextSpan(
+                          style: TextStyle(
+                            fontSize: 25,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: 'CRT VISTORIA',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                    )
-                  ],
-                ),
-              ),
-
-              // Formulário
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 32,
-                  vertical: 40,
-                ),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(45),
-                  ),
-                ),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      // Email
-                      CustomTextField(
-                        controller: usernameController,
-                        icon: Icons.email,
-                        label: 'Email',
-                        validator: emailValidator,
-                      ),
-
-                      // Senha
-                      CustomTextField(
-                        controller: passwordController,
-                        icon: Icons.lock,
-                        label: 'Senha',
-                        isSecret: true,
-                        validator: passwordValidator,
-                      ),
-
-                      // Botão de entrar
+                      //Banner
                       SizedBox(
-                        height: 50,
-                        child: GetX<AuthController>(
-                          builder: (authController) {
-                            return ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: CustomColors.customSwatchColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18),
-                                ),
-                              ),
-                              onPressed: authController.isLoading.value
-                                  ? null
-                                  : () {
-                                      FocusScope.of(context).unfocus();
-                                      if (_formKey.currentState!.validate()) {
-                                        String username =
-                                            usernameController.text;
-                                        String password =
-                                            passwordController.text;
-                                        authController.signIn(
-                                            username: username,
-                                            password: password);
-                                      }
-                                    },
-                              child: authController.isLoading.value
-                                  ? const CircularProgressIndicator()
-                                  : const Text(
-                                      'Entrar',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                            );
-                          },
+                        height: 30,
+                        child: DefaultTextStyle(
+                          style: const TextStyle(
+                            fontSize: 25,
+                          ),
+                          child: AnimatedTextKit(
+                            pause: Duration.zero,
+                            repeatForever: true,
+                            animatedTexts: [
+                              FadeAnimatedText('Confiabilidade'),
+                              FadeAnimatedText('Agilidade'),
+                              FadeAnimatedText('Rapidez'),
+                            ],
+                          ),
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ),
-              ),
-            ],
+
+                // Formulário
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32,
+                    vertical: 40,
+                  ),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(45),
+                    ),
+                  ),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // Email
+                        CustomTextField(
+                          controller: usernameController,
+                          icon: Icons.email,
+                          label: 'Email',
+                          validator: emailValidator,
+                        ),
+
+                        // Senha
+                        CustomTextField(
+                          controller: passwordController,
+                          icon: Icons.lock,
+                          label: 'Senha',
+                          isSecret: true,
+                          validator: passwordValidator,
+                        ),
+
+                        // Botão de entrar
+                        SizedBox(
+                          height: 50,
+                          child: GetX<AuthController>(
+                            builder: (authController) {
+                              return ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      CustomColors.customSwatchColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18),
+                                  ),
+                                ),
+                                onPressed: authController.isLoading.value
+                                    ? null
+                                    : () {
+                                        FocusScope.of(context).unfocus();
+                                        if (_formKey.currentState!.validate()) {
+                                          String username =
+                                              usernameController.text;
+                                          String password =
+                                              passwordController.text;
+                                          authController.signIn(
+                                              username: username,
+                                              password: password);
+                                        }
+                                      },
+                                child: authController.isLoading.value
+                                    ? const CircularProgressIndicator()
+                                    : const Text(
+                                        'Entrar',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
+      ]),
     );
   }
 }
