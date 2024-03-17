@@ -5,7 +5,7 @@ import 'package:vistoria_cfc/src/pages/base/binding/navigation_binding.dart';
 import 'package:vistoria_cfc/src/pages/home/binding/home_binding.dart';
 import 'package:vistoria_cfc/src/pages/splash/splash_screen.dart';
 import 'package:vistoria_cfc/src/pages/vistoria/binding/vistoria_binding.dart';
-import 'package:vistoria_cfc/src/pages/vistoria/vistoria_screen.dart';
+import 'package:vistoria_cfc/src/pages/vistoria/view/vistoria_screen.dart';
 
 abstract class AppPages {
   static final pages = <GetPage>[

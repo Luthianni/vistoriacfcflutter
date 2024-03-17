@@ -13,6 +13,7 @@ class NavigationController extends GetxController {
   late RxInt _currentIndex;
 
   PageController get pageController => _pageController;
+  int get currentIndex => _currentIndex.value;
 
   @override
   void onInit() {

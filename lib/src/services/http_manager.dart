@@ -6,38 +6,30 @@ abstract class HttpMethods {
   static const String get = 'GET';
   static const String put = 'PUT';
   static const String patch = 'PATCH';
-  static const String delete = "DELETE";
+  static const String delete = 'DELETE';
 }
 
 class HttpManager {
-  late Dio _dio;
-
+  late final Dio _dio;
   final logger = Logger();
 
-  HttpManager() {
-    _initializeDio();
+  HttpManager() : _dio = Dio() {
+    _initializeInterceptors();
   }
 
-  void _initializeDio() {
-    // Inicialize o Dio
-    _dio = Dio();
-
-    // Adicione interceptadores ao Dio
+  void _initializeInterceptors() {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
-          // Interceptador executado antes da requisição ser enviada
           logger.i('Interceptador: Antes da requisição - ${options.uri}');
           return handler.next(options);
         },
         onResponse: (response, handler) {
-          // Interceptador executado após a resposta ser recebida
           logger.i(
               'Interceptador: Após a resposta - ${response.requestOptions.uri}');
           return handler.next(response);
         },
         onError: (DioError e, handler) {
-          // Interceptador executado em caso de erro
           logger.e('Interceptador de Erro: ${e.message}');
           return handler.next(e);
         },
@@ -52,16 +44,15 @@ class HttpManager {
     Map<String, dynamic>? body,
     String? token,
   }) async {
-    final defaultHeaders = (headers?.cast<String, String>() ?? {})
-      ..addAll({
-        'content-type': 'application/json',
-        if (token != null) 'Authorization': 'Bearer $token',
-      });
+    final defaultHeaders = {
+      ...?headers?.cast<String, String>(),
+      'content-type': 'application/json',
+      if (token?.isNotEmpty ?? false) 'Authorization': 'Bearer $token',
+    };
 
     try {
       logger.w('Enviando requisição para $url');
-
-      Response response = await _dio.request(
+      final response = await _dio.request(
         url,
         options: Options(
           headers: defaultHeaders,
@@ -69,13 +60,11 @@ class HttpManager {
         ),
         data: body,
       );
-
       logger.i('Requisição bem-sucedida: ${response.data}');
-
       return response.data;
     } on DioError catch (error) {
       logger.e('Erro na requisição: ${error.message}');
-      return Future.value(error.response?.data ?? {});
+      return error.response?.data ?? {};
     } catch (error) {
       logger.e('Erro desconhecido: $error');
       return {};

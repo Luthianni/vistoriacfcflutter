@@ -6,6 +6,9 @@ String authErrorsString(String? code) {
     case 'Invalid session token':
       return 'Token inválido';
 
+    case '"Http status error [401]"':
+      return 'Sem Permissão';
+
     default:
       return 'Um erro indefinido ocorreu';
   }

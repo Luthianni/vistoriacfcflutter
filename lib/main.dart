@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       title: 'CFC Vistória',
       theme: ThemeData(
         primarySwatch: Colors.green,
-        scaffoldBackgroundColor: Colors.white.withAlpha(190),
+        scaffoldBackgroundColor: const Color.fromRGBO(255, 255, 255, 1.0),
       ),
       debugShowCheckedModeBanner: false,
       initialRoute: PagesRoutes.splashRoute,

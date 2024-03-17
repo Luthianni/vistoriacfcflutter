@@ -19,7 +19,7 @@ class _AgendaTabSelectorState extends State<AgendaTab> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color.fromARGB(255, 158, 224, 160),
         elevation: 0,
         centerTitle: true,
         title: const Text(
@@ -28,7 +28,12 @@ class _AgendaTabSelectorState extends State<AgendaTab> {
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.bold,
-            color: Colors.green,
+            color: Color.fromRGBO(255, 255, 255, 1.0),
+          ),
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20),
           ),
         ),
       ),
@@ -51,12 +56,14 @@ class _AgendaTabSelectorState extends State<AgendaTab> {
             ),
             calendarStyle: const CalendarStyle(
               selectedDecoration: BoxDecoration(
-                color: Colors.green,
+                color: Color.fromARGB(255, 158, 224, 160),
                 shape: BoxShape.circle,
               ),
-              selectedTextStyle: TextStyle(color: Colors.white),
+              selectedTextStyle: TextStyle(
+                color: Color.fromRGBO(255, 255, 255, 1.0),
+              ),
               todayDecoration: BoxDecoration(
-                color: Colors.blue,
+                color: Color.fromARGB(255, 158, 224, 160),
                 shape: BoxShape.circle,
               ),
             ),
@@ -67,5 +74,3 @@ class _AgendaTabSelectorState extends State<AgendaTab> {
     );
   }
 }
-
-

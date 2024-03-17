@@ -24,7 +24,7 @@ class SplashScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             AppNameWidget(
-              greenTitleColor: Colors.white,
+              greenTitleColor: Color.fromRGBO(255, 255, 255, 1.0),
               textSize: 40,
             ),
           ],

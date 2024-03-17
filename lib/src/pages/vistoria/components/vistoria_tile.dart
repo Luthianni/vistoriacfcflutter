@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vistoria_cfc/src/models/vistoria_model.dart';
-import 'package:vistoria_cfc/src/pages/vistoria/vistoria_tab.dart';
+import 'package:vistoria_cfc/src/pages/vistoria/view/vistoria_tab.dart';
 
 class VistoriaTile extends StatelessWidget {
   final VistoriaModel vistoria;
@@ -24,7 +24,7 @@ class VistoriaTile extends StatelessWidget {
             height: 600,
             child: Card(
               elevation: 1,
-              shadowColor: Colors.yellow.shade300,
+              shadowColor: Colors.grey.shade100,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
@@ -47,37 +47,6 @@ class VistoriaTile extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    // Text(
-                    //   "Agendamento: "
-                    //   '${vistoria.dataAgendamento} / ${vistoria.horaAgendada}',
-                    //   style: const TextStyle(
-                    //     fontSize: 14,
-                    //     fontWeight: FontWeight.bold,
-                    //   ),
-                    // ),
-                    // Text(
-                    //   "Endereço:\n "
-                    //   '${vistoria.logradouro}',
-                    //   style: const TextStyle(
-                    //     fontSize: 14,
-                    //     fontWeight: FontWeight.bold,
-                    //   ),
-                    // ),
-                    // Text(
-                    //   "Bairro: "
-                    //   '${vistoria.bairro}',
-                    //   style: const TextStyle(
-                    //     fontSize: 14,
-                    //     fontWeight: FontWeight.bold,
-                    //   ),
-                    // ),
-                    // Text(
-                    //   '${vistoria.cidade}, ${vistoria.estado}',
-                    //   style: const TextStyle(
-                    //     fontSize: 14,
-                    //     fontWeight: FontWeight.bold,
-                    //   ),
-                    // ),
                   ],
                 ),
               ),

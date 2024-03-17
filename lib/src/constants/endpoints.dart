@@ -1,23 +1,25 @@
 // CONNECTION BACK-END //
 //const String baseUrl = 'http://192.168.0.200:8080/api/v1';
-const String baseUrl = 'http://localhost:8080/api/v1';
+//const String baseUrl = 'http://localhost:8080';
 //const String baseUrl = 'http://172.25.137.54:8080/api/v1';
+const String baseUrl = 'https://ab64-177-22-40-21.ngrok-free.app';
 
 abstract class Endpoints {
   // AUTH //
-  static const String signin = '$baseUrl/auth';
-  static const String validateToken = '$baseUrl/validateToken';
-  static const String signup = '$baseUrl/signup';
-  static const String usuarios = '$baseUrl/usuarios';
-  // SERVIDORES //
-  static const String servidores = '$baseUrl/servidores';
+  static const String signin = '$baseUrl/api/v1/auth';
+  static const String validateToken = '$baseUrl/api/v1/validateToken';
+  static const String signup = '$baseUrl/api/v1/signup';
+  // USERS //
+  static const String usuarios = '$baseUrl/api/v1/usuarios';
+  static const String userId = '$baseUrl/api/v1/usuarios';
+  // CENTRO DE FORMAÇÃO //
   static const String centroFormacaoCondutores =
       '$baseUrl/centroFormacaoCondutores';
-  static const String enderecos = '$baseUrl/enderecos';
+  static const String enderecos = '$baseUrl/api/v1/enderecos';
   // VISTORIAS //
-  static const String vistoria = '$baseUrl/vistoria';
-  static const String getAllVistorias = '$baseUrl/get-vistorias-list';
+  static const String vistoria = '$baseUrl/api/v1/vistoria';
+  static const String getAllVistorias = '$baseUrl/api/v1/get-vistorias-list';
   // PASSWORD //
-  static const String resetPassword = '$baseUrl/reset-password';
-  static const String changePassword = '$baseUrl/change-password';
+  static const String resetPassword = '$baseUrl/api/v1/reset-password';
+  static const String changePassword = '$baseUrl/api/v1/change-password';
 }

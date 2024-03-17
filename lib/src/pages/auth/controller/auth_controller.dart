@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:logger/logger.dart'; // Adicione esta importação
+import 'package:vistoria_cfc/src/constants/endpoints.dart';
 import 'package:vistoria_cfc/src/constants/storage_keys.dart';
 import 'package:vistoria_cfc/src/models/user_model.dart';
 import 'package:vistoria_cfc/src/pages/auth/repository/auth_repository.dart';
@@ -72,38 +73,38 @@ class AuthController extends GetxController {
     );
   }
 
-  Future<void> changePassword({
-    required String currentPassword,
-    required String newPassword,
-  }) async {
-    isLoading.value = true;
+  // Future<void> changePassword({
+  //   required String currentPassword,
+  //   required String newPassword,
+  // }) async {
+  //   isLoading.value = true;
 
-    final result = await authRepository.changePassword(
-      username: user.username!,
-      currentPassword: currentPassword,
-      newPassword: newPassword,
-      token: user.token!,
-    );
+  //   final result = await authRepository.changePassword(
+  //     username: user.username!,
+  //     currentPassword: currentPassword,
+  //     newPassword: newPassword,
+  //     token: user.token!,
+  //   );
 
-    isLoading.value = false;
+  //   isLoading.value = false;
 
-    if (result) {
-      utilsServices.showToast(
-        message: 'A senha foi atualizada com sucesso!',
-      );
+  //   if (result) {
+  //     utilsServices.showToast(
+  //       message: 'A senha foi atualizada com sucesso!',
+  //     );
 
-      signOut();
-    } else {
-      utilsServices.showToast(
-        message: 'A senha atual está incorreta',
-        isError: true,
-      );
-    }
-  }
+  //     signOut();
+  //   } else {
+  //     utilsServices.showToast(
+  //       message: 'A senha atual está incorreta',
+  //       isError: true,
+  //     );
+  //   }
+  // }
 
-  Future<void> resetPassword(String email) async {
-    await authRepository.resetPassword(email: email);
-  }
+  // Future<void> resetPassword(String email) async {
+  //   await authRepository.resetPassword(email: email);
+  // }
 
   Future<void> signOut() async {
     user = UserModel();
@@ -113,6 +114,10 @@ class AuthController extends GetxController {
 
   void saveTokenAndProceedToBase() {
     utilsServices.saveLocalData(key: StorageKeys.token, data: user.token!);
+    if (user.id != null) {
+      String userId = user.id.toString();
+      utilsServices.saveLocalData(key: StorageKeys.id, data: userId);
+    }
     Get.offAllNamed(PagesRoutes.baseRoute);
   }
 
@@ -133,6 +138,43 @@ class AuthController extends GetxController {
           message: message,
           isError: true,
         );
+      },
+    );
+  }
+
+  Future<void> userId() async {
+    String? token = await utilsServices.getLocalData(key: StorageKeys.token);
+
+    if (token == null) {
+      Get.offAllNamed(PagesRoutes.baseRoute);
+      return;
+    }
+
+    logger.i('Token obtido com sucesso: $token');
+
+    String? id = await utilsServices.getLocalData(key: StorageKeys.id);
+    if (id == null) {
+      return;
+    }
+
+    logger.i('ID do usuário obtido: $id');
+
+    String userIdUrl = '$baseUrl/api/v1/usuarios/$id';
+
+    AuthResult authResult = await authRepository.userId(token, id);
+
+    authResult.when(
+      success: (user) {
+        this.user = user;
+        logger.i('Token válido e ID de de usuário existente !!');
+      },
+      error: (message) {
+        utilsServices.showToast(
+          message: message,
+          isError: true,
+        );
+        logger.i(user);
+        Get.offAllNamed(PagesRoutes.baseRoute);
       },
     );
   }

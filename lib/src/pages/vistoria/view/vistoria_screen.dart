@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vistoria_cfc/src/models/vistoria_model.dart';
-import 'package:vistoria_cfc/src/pages/vistoria/vistoria_tab.dart';
+import 'package:vistoria_cfc/src/pages/vistoria/view/vistoria_tab.dart';
 import 'package:vistoria_cfc/src/services/utils_services.dart';
 
 class VistoriaScreen extends StatefulWidget {
@@ -22,7 +22,7 @@ class _VistoriaScreenState extends State<VistoriaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white.withAlpha(230),
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1.0),
       body: Stack(
         children: [
           Column(
@@ -39,7 +39,7 @@ class _VistoriaScreenState extends State<VistoriaScreen> {
                 child: Container(
                   padding: const EdgeInsets.all(32),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: const Color.fromRGBO(255, 255, 255, 1.0),
                     borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(50),
                     ),
@@ -80,36 +80,6 @@ class _VistoriaScreenState extends State<VistoriaScreen> {
                                       height: 1.5, fontWeight: FontWeight.bold),
                                 ),
                               ),
-                              // Text(
-                              //   "Endereço :"
-                              //   '${widget.vistoria.logradouro}',
-                              //   style: const TextStyle(
-                              //       height: 1.5, fontWeight: FontWeight.bold),
-                              // ),
-                              // Text(
-                              //   "Bairro :"
-                              //   '${widget.vistoria.bairro}',
-                              //   style: const TextStyle(
-                              //       height: 1.5, fontWeight: FontWeight.bold),
-                              // ),
-                              // Text(
-                              //   "Cidade :"
-                              //   '${widget.vistoria.cidade}',
-                              //   style: const TextStyle(
-                              //       height: 1.5, fontWeight: FontWeight.bold),
-                              // ),
-                              // Text(
-                              //   "Estado :"
-                              //   '${widget.vistoria.estado}',
-                              //   style: const TextStyle(
-                              //       height: 1.5, fontWeight: FontWeight.bold),
-                              // ),
-                              // Text(
-                              //   "Cep :"
-                              //   '${widget.vistoria.cep}',
-                              //   style: const TextStyle(
-                              //       height: 1.5, fontWeight: FontWeight.bold),
-                              // ),
                             ],
                           ),
                         ),

@@ -57,7 +57,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
         onSaved: widget.onSaved,
         keyboardType: widget.textInputType,
         decoration: InputDecoration(
-          prefixIcon: Icon(widget.icon),
+          iconColor: const Color.fromARGB(255, 158, 224, 160),
+          prefixIcon: Icon(
+            widget.icon,
+            color: const Color.fromARGB(255, 158, 224, 160),
+          ),
           suffixIcon: widget.isSecret
               ? IconButton(
                   onPressed: () {
@@ -65,14 +69,19 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       isObscure = !isObscure;
                     });
                   },
-                  icon:
-                      Icon(isObscure ? Icons.visibility : Icons.visibility_off),
+                  icon: Icon(
+                    isObscure ? Icons.visibility : Icons.visibility_off,
+                    color: const Color.fromARGB(255, 158, 224, 160),
+                  ),
                 )
               : null,
           labelText: widget.label,
           isDense: true,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
+            borderSide: const BorderSide(
+              color: Color.fromARGB(255, 158, 224, 160),
+            ),
           ),
         ),
       ),

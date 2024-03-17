@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vistoria_cfc/src/config/custom_colors.dart';
+import 'package:get/get.dart';
 import 'package:vistoria_cfc/src/models/vistoria_model.dart';
+import 'package:vistoria_cfc/src/pages/auth/controller/auth_controller.dart';
 import 'package:vistoria_cfc/src/pages/vistoria/components/vistoria_tile.dart';
 
 class HomeTab extends StatelessWidget {
@@ -12,74 +13,62 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AuthController authController = Get.put(AuthController());
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-      ),
-      body: Column(children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 10,
+        backgroundColor: const Color.fromARGB(255, 158, 224, 160),
+        title: Text(
+          'Olá, ${authController.user.nome ?? 'Nome não encontrado'}! ',
+          style: const TextStyle(
+            color: Color.fromRGBO(255, 255, 255, 1.0),
+            fontSize: 14,
           ),
-          child: TextFormField(
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.white,
-              isDense: true,
-              hintText: 'Pesquise aqui ...',
-              hintStyle: TextStyle(
-                color: Colors.grey.shade400,
-              ),
-              prefixIcon: Icon(
-                Icons.search,
-                color: CustomColors.customContrastColor,
-                size: 21,
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(60),
-                borderSide: const BorderSide(
-                  width: 0,
-                  style: BorderStyle.none,
-                ),
-              ),
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20),
+          ),
+        ),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: FutureBuilder<List<VistoriaModel>>(
+              future: fetchData(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return const Center(
+                      child: Text('Erro ao carregar vistorias'));
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(
+                      child: Text('Nenhuma vistoria encontrada'));
+                } else {
+                  return GridView.builder(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                    physics: const BouncingScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 1,
+                      mainAxisSpacing: 6,
+                      crossAxisSpacing: 6,
+                      childAspectRatio: 16 / 6.5,
+                    ),
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (_, index) {
+                      return VistoriaTile(
+                        vistoria: snapshot.data![index],
+                      );
+                    },
+                  );
+                }
+              },
             ),
           ),
-        ),
-        Expanded(
-          child: FutureBuilder<List<VistoriaModel>>(
-            future: fetchData(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return const Center(child: Text('Erro ao carregar vistorias'));
-              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return const Center(child: Text('Nenhuma vistoria encontrada'));
-              } else {
-                return GridView.builder(
-                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                  physics: const BouncingScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
-                    mainAxisSpacing: 6,
-                    crossAxisSpacing: 6,
-                    childAspectRatio: 16 / 6.5,
-                  ),
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (_, index) {
-                    return VistoriaTile(
-                      vistoria: snapshot.data![index],
-                    );
-                  },
-                );
-              }
-            },
-          ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }

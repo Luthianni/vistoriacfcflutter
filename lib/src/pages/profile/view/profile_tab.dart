@@ -1,287 +1,139 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:vistoria_cfc/src/pages/auth/controller/auth_controller.dart';
 
 class ProfileTab extends StatefulWidget {
-  const ProfileTab({super.key});
+  const ProfileTab({Key? key}) : super(key: key);
 
   @override
   State<ProfileTab> createState() => _ProfileTabState();
 }
 
 class _ProfileTabState extends State<ProfileTab> {
+  final authController = Get.find<AuthController>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    authController.userId();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
+      appBar: AppBar(
+        title: const Text(
+          'Perfil do usuário',
+          style: TextStyle(
+            color: Color.fromRGBO(255, 255, 255, 1.0),
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              authController.signOut();
+            },
+            icon: const Icon(Icons.logout),
+            color: const Color.fromRGBO(255, 255, 255, 1.0),
+          ),
+        ],
+        backgroundColor: const Color.fromARGB(255, 158, 224, 160),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20),
+          ),
+        ),
+      ),
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1.0),
       body: Stack(
+        alignment: Alignment.topCenter, // Alinha a Stack no topo do corpo
         children: [
-          Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 4,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  height: MediaQuery.of(context).size.height / 1.5,
-                  width: MediaQuery.of(context).size.height / 2.3,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 150),
-                    child: Column(
-                      children: [
-                        //const FlutterLogo(size: 100),
-                        const Padding(
-                          padding: EdgeInsets.all(20),
-                          child: Text(
-                            "Nome: Luthianni Alves",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.height / 1.5,
-                            child: const Text(
-                              "CRT:",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 20, right: 20),
-                          // child: Divider(color: Colors.red),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width / 1.5,
-                            child: const Text(
-                              "Setor:",
-                              textAlign: TextAlign.center,
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.grey),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width / 1.5,
-                            child: const Text(
-                              "Texto 04",
-                              textAlign: TextAlign.center,
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.black),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+          Padding(
+            padding: const EdgeInsets.only(
+                top: 05.0), // Espaço entre a AppBar e o primeiro Container
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(30.0),
+              height: MediaQuery.of(context).size.height / 1.5,
+              width: MediaQuery.of(context).size.height / 2.3,
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 208, 243, 192),
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
           ),
-          Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 7,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  height: MediaQuery.of(context).size.height / 5,
-                  width: MediaQuery.of(context).size.width / 3,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 25.0,
-                        spreadRadius: 2,
-                      )
-                    ],
+          const Divider(
+            color: Colors.transparent,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 200.0, left: 50.0),
+                child: Text(
+                  " ${authController.user.nome ?? 'Nome não encontardo !!'}",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
                   ),
-                  child: const Image(image: AssetImage('assets/avatar.png')),
-                )
-              ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0, right: 200.0),
+                child: Text(
+                  "CPF: ${authController.user.cpf ?? 'Não foi posivel encontrar o CPF !!'}",
+                  textAlign: TextAlign.right,
+                  style: const TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0, right: 200.0),
+                child: Text(
+                  "Matrícula: ${authController.user.matricula ?? 'Não foi posivel encontrar a Matricula !!'}",
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0, right: 100.0),
+                child: Text(
+                  "Email: ${authController.user.email ?? 'Não foi posivel encontrar o emailD !!'}",
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0, left: 20.0),
+            child: Container(
+              alignment: Alignment.center,
+              height: MediaQuery.of(context).size.height / 6,
+              width: MediaQuery.of(context).size.width / 4,
+              decoration: BoxDecoration(
+                color: const Color.fromRGBO(255, 255, 255, 1.0),
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 25.0,
+                    spreadRadius: 2,
+                  )
+                ],
+              ),
+              child: const Image(image: AssetImage('assets/avatar.png')),
             ),
-          )
+          ),
         ],
       ),
     );
   }
 }
-
-// class _ProfileTabState extends State<ProfileTab> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Perfil do usuário'),
-//         actions: [
-//           IconButton(
-//             onPressed: () {},
-//             icon: const Icon(
-//               Icons.logout,
-//             ),
-//           ),
-//         ],
-//       ),
-//       body: ListView(
-//         physics: const BouncingScrollPhysics(),
-//         padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
-//         children: [
-//           const CircleAvatar(
-//             radius: 0,
-//             backgroundImage: AssetImage('assets/logo.png'),
-//           ),
-//           const SizedBox(height: 20),
-//           //Email
-//           CustomTextField(
-//             readOnly: true,
-//             initialValue: appData.user.email,
-//             icon: Icons.email,
-//             label: 'Email',
-//           ),
-//           //Nome
-//           CustomTextField(
-//             readOnly: true,
-//             initialValue: appData.user.name,
-//             icon: Icons.person,
-//             label: 'Nome',
-//           ),
-//           //Celular
-//           CustomTextField(
-//             readOnly: true,
-//             initialValue: appData.user.phone,
-//             icon: Icons.phone,
-//             label: 'Celular',
-//           ),
-//           //CPF
-//           CustomTextField(
-//             readOnly: true,
-//             initialValue: appData.user.cpf,
-//             icon: Icons.file_copy,
-//             label: 'CPF',
-//             isSecret: true,
-//           ),
-
-//           // Botão atualizar senha
-//           SizedBox(
-//             height: 50,
-//             child: OutlinedButton(
-//               style: OutlinedButton.styleFrom(
-//                   side: const BorderSide(
-//                     color: Colors.green,
-//                   ),
-//                   shape: RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(20),
-//                   )),
-//               onPressed: () {
-//                 updatePassword();
-//               },
-//               child: const Text('Atualizar a Senha'),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-
-//   Future<bool?> updatePassword() {
-//     return showDialog(
-//       context: context,
-//       builder: (context) {
-//         return Dialog(
-//           shape: RoundedRectangleBorder(
-//             borderRadius: BorderRadius.circular(20),
-//           ),
-//           child: Stack(
-//             children: [
-//               Padding(
-//                 padding: const EdgeInsets.all(16),
-//                 child: Column(
-//                   crossAxisAlignment: CrossAxisAlignment.stretch,
-//                   mainAxisSize: MainAxisSize.min,
-//                   children: [
-//                     //Titulo
-//                     const Padding(
-//                       padding: EdgeInsets.symmetric(vertical: 12),
-//                       child: Text(
-//                         'Atualização de senha',
-//                         textAlign: TextAlign.center,
-//                         style: TextStyle(
-//                           fontSize: 16,
-//                           fontWeight: FontWeight.bold,
-//                         ),
-//                       ),
-//                     ),
-//                     //Senha atual
-//                     const CustomTextField(
-//                       isSecret: true,
-//                       icon: Icons.lock,
-//                       label: 'Senha atual',
-//                       readOnly: false,
-//                       initialValue: 'hum',
-//                     ),
-//                     //Nova senha
-//                     const CustomTextField(
-//                       isSecret: true,
-//                       icon: Icons.lock_outline,
-//                       label: 'Nova senha',
-//                       readOnly: false,
-//                       initialValue: 'doistres',
-//                     ),
-//                     // Confirmação nova senha
-//                     const CustomTextField(
-//                       isSecret: true,
-//                       icon: Icons.lock_outline,
-//                       label: 'Confirmar nova senha',
-//                       readOnly: false,
-//                       initialValue: 'doistres',
-//                     ),
-
-//                     // Botão de confirmação
-//                     SizedBox(
-//                       height: 45,
-//                       child: ElevatedButton(
-//                         style: ElevatedButton.styleFrom(
-//                           shape: RoundedRectangleBorder(
-//                             borderRadius: BorderRadius.circular(20),
-//                           ),
-//                         ),
-//                         onPressed: () {},
-//                         child: const Text('Atualizar'),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//               Positioned(
-//                 top: 5,
-//                 right: 5,
-//                 child: IconButton(
-//                   onPressed: () {
-//                     Navigator.of(context).pop();
-//                   },
-//                   icon: const Icon(Icons.close),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         );
-//       },
-//     );
-//   }
-// }

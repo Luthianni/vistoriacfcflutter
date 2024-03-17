@@ -41,7 +41,7 @@ class SignUpScreen extends StatelessWidget {
                       child: Text(
                         'Cadastro',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Color.fromRGBO(255, 255, 255, 1.0),
                           fontSize: 35,
                         ),
                       ),
@@ -54,7 +54,7 @@ class SignUpScreen extends StatelessWidget {
                       vertical: 40,
                     ),
                     decoration: const BoxDecoration(
-                      color: Colors.white,
+                      color: Color.fromRGBO(255, 255, 255, 1.0),
                       borderRadius: BorderRadius.vertical(
                         top: Radius.circular(45),
                       ),
@@ -157,7 +157,7 @@ class SignUpScreen extends StatelessWidget {
                     },
                     icon: const Icon(
                       Icons.arrow_back_ios,
-                      color: Colors.white,
+                      color: Color.fromRGBO(255, 255, 255, 1.0),
                     ),
                   ),
                 ),
