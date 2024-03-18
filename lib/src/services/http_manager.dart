@@ -30,7 +30,30 @@ class HttpManager {
           return handler.next(response);
         },
         onError: (DioError e, handler) {
-          logger.e('Interceptador de Erro: ${e.message}');
+          String errorMessage;
+          dynamic originalError;
+          StackTrace? stackTrace;
+
+          if (e.response != null) {
+            // Se houver uma resposta da solicitação, use o status code da resposta.
+            errorMessage =
+                'Erro de solicitação com código de status ${e.response?.statusCode}: ${e.message}';
+            originalError = e.error;
+            stackTrace = e.stackTrace;
+          } else {
+            // Se não houver resposta, é provavelmente um erro de conexão.
+            errorMessage = 'Erro de conexão: ${e.message}';
+            originalError = e.error;
+            stackTrace = StackTrace.fromString('');
+          }
+
+          // Log do erro.
+          logger.e(errorMessage, error: originalError, stackTrace: stackTrace);
+
+          // Aqui você pode realizar tratamento específico para diferentes tipos de erro,
+          // como reenviar a solicitação, mostrar uma mensagem de erro para o usuário, etc.
+
+          // Retornar o erro para que ele continue sendo propagado.
           return handler.next(e);
         },
       ),

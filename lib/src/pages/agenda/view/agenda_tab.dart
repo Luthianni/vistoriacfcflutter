@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:vistoria_cfc/src/pages/common_widgets/custom_text_field.dart';
+import 'package:vistoria_cfc/src/services/validators.dart';
 
 var now = DateTime.now();
 var firstDay = DateTime(now.year, now.month - 3, now.day);
@@ -68,9 +70,66 @@ class _AgendaTabSelectorState extends State<AgendaTab> {
               ),
             ),
             locale: 'pt_BR',
+            onDaySelected: (selectedDay, focusedDay) {
+              _showAgendamentoFormModal(context, selectedDay);
+            },
           ),
         ],
       ),
+    );
+  }
+
+  void _showAgendamentoFormModal(BuildContext context, DateTime selectedDay) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Scaffold(
+          resizeToAvoidBottomInset: true,
+          body: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Criar Agendamento para ${selectedDay.day}/${selectedDay.month}/${selectedDay.year}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  // Adicione aqui o seu formulário de criação de agendamento
+                  const Form(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        CustomTextField(
+                          icon: Icons.corporate_fare,
+                          label: 'Centro de Formação',
+                        ),
+                        CustomTextField(
+                          icon: Icons.format_list_numbered,
+                          label: 'CNPJ',
+                          validator: cnpjvalidator,
+                        ),
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Lógica para salvar o agendamento
+                      Navigator.pop(context); // Fecha o modal
+                    },
+                    child: const Text('Salvar'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

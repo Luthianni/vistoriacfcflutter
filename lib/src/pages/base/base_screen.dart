@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vistoria_cfc/src/pages/agenda/agenda_tab.dart';
+import 'package:vistoria_cfc/src/pages/agenda/view/agenda_tab.dart';
 import 'package:vistoria_cfc/src/pages/base/controller/navigation_controller.dart';
 import 'package:vistoria_cfc/src/pages/home/Components/home_tab.dart';
 import 'package:vistoria_cfc/src/pages/profile/view/profile_tab.dart';

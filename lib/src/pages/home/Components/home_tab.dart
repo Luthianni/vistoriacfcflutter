@@ -15,11 +15,19 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthController authController = Get.put(AuthController());
 
+    String? nomeUsuario = authController.user.nome;
+    List<String> partesNome = nomeUsuario?.split(' ') ?? [];
+    String primeiroNome = partesNome.isNotEmpty ? partesNome[0] : '';
+    String ultimoNome = partesNome.length > 1 ? partesNome[1] : '';
+
+    String nomeFormatado =
+        '${StringExtension.capitalize(primeiroNome)} ${StringExtension.capitalize(ultimoNome)}';
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 158, 224, 160),
         title: Text(
-          'Olá, ${authController.user.nome ?? 'Nome não encontrado'}! ',
+          'Olá, $nomeFormatado!',
           style: const TextStyle(
             color: Color.fromRGBO(255, 255, 255, 1.0),
             fontSize: 14,
@@ -70,5 +78,13 @@ class HomeTab extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+extension StringExtension on String {
+  static String capitalize(String text) {
+    return text.isNotEmpty
+        ? text[0].toUpperCase() + text.substring(1).toLowerCase()
+        : '';
   }
 }

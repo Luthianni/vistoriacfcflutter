@@ -55,3 +55,11 @@ String? cpfvalidator(String? cpf) {
 
   return null;
 }
+
+String? cnpjvalidator(String? cnpj) {
+  if (cnpj == null || cnpj.isEmpty) {
+    return 'Digite um CNPJ';
+  }
+
+  if (!cnpj.isCnpj) return 'Digite um CNPJ válido!';
+}
