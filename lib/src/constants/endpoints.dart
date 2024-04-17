@@ -1,8 +1,8 @@
 // CONNECTION BACK-END //
 //const String baseUrl = 'http://192.168.0.200:8080/api/v1';
-//const String baseUrl = 'http://localhost:8080';
+const String baseUrl = 'http://localhost:8080';
 //const String baseUrl = 'http://172.25.137.54:8080/api/v1';
-const String baseUrl = 'https://ab64-177-22-40-21.ngrok-free.app';
+//const String baseUrl = 'https://ab64-177-22-40-21.ngrok-free.app';
 
 abstract class Endpoints {
   // AUTH //
@@ -11,7 +11,7 @@ abstract class Endpoints {
   static const String signup = '$baseUrl/api/v1/signup';
   // USERS //
   static const String usuarios = '$baseUrl/api/v1/usuarios';
-  static const String userId = '$baseUrl/api/v1/usuarios';
+  static const String profileId = '$baseUrl/api/v1/profile';
   // CENTRO DE FORMAÇÃO //
   static const String centroFormacaoCondutores =
       '$baseUrl/centroFormacaoCondutores';

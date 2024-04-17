@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vistoria_cfc/src/pages/auth/controller/auth_controller.dart';
+import 'package:vistoria_cfc/src/pages/profile/controller/profile_controller.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({Key? key}) : super(key: key);
@@ -10,13 +11,14 @@ class ProfileTab extends StatefulWidget {
 }
 
 class _ProfileTabState extends State<ProfileTab> {
+  final profileController = Get.find<ProfileController>();
   final authController = Get.find<AuthController>();
 
   @override
   void initState() {
     super.initState();
 
-    authController.userId();
+    profileController.profileId();
   }
 
   @override
@@ -72,7 +74,7 @@ class _ProfileTabState extends State<ProfileTab> {
               Padding(
                 padding: const EdgeInsets.only(top: 200.0, left: 50.0),
                 child: Text(
-                  " ${authController.user.nome ?? 'Nome não encontardo !!'}",
+                  " ${profileController.profile.nome ?? 'Nome não encontardo !!'}",
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 16,
@@ -83,7 +85,7 @@ class _ProfileTabState extends State<ProfileTab> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, right: 200.0),
                 child: Text(
-                  "CPF: ${authController.user.cpf ?? 'Não foi posivel encontrar o CPF !!'}",
+                  "CPF: ${profileController.profile.cpf ?? 'Não foi posivel encontrar o CPF !!'}",
                   textAlign: TextAlign.right,
                   style: const TextStyle(
                     fontSize: 14,
@@ -93,7 +95,7 @@ class _ProfileTabState extends State<ProfileTab> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, right: 200.0),
                 child: Text(
-                  "Matrícula: ${authController.user.matricula ?? 'Não foi posivel encontrar a Matricula !!'}",
+                  "Matrícula: ${profileController.profile.matricula ?? 'Não foi posivel encontrar a Matricula !!'}",
                   textAlign: TextAlign.left,
                   style: const TextStyle(
                     fontSize: 14,
@@ -103,7 +105,7 @@ class _ProfileTabState extends State<ProfileTab> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, right: 100.0),
                 child: Text(
-                  "Email: ${authController.user.email ?? 'Não foi posivel encontrar o emailD !!'}",
+                  "Telefone: ${profileController.profile.telefone ?? 'Telefone não encontrado!!'}",
                   textAlign: TextAlign.left,
                   style: const TextStyle(
                     fontSize: 14,

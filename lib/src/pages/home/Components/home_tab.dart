@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vistoria_cfc/src/models/vistoria_model.dart';
-import 'package:vistoria_cfc/src/pages/auth/controller/auth_controller.dart';
+import 'package:vistoria_cfc/src/pages/profile/controller/profile_controller.dart';
 import 'package:vistoria_cfc/src/pages/vistoria/components/vistoria_tile.dart';
 
 class HomeTab extends StatelessWidget {
@@ -13,9 +13,10 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthController authController = Get.put(AuthController());
+    //final AuthController authController = Get.put(AuthController());
+    final ProfileController profileController = Get.put(ProfileController());
 
-    String? nomeUsuario = authController.user.nome;
+    String? nomeUsuario = profileController.profile.nome;
     List<String> partesNome = nomeUsuario?.split(' ') ?? [];
     String primeiroNome = partesNome.isNotEmpty ? partesNome[0] : '';
     String ultimoNome = partesNome.length > 1 ? partesNome[1] : '';

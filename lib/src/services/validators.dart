@@ -62,4 +62,6 @@ String? cnpjvalidator(String? cnpj) {
   }
 
   if (!cnpj.isCnpj) return 'Digite um CNPJ válido!';
+
+  return null;
 }
