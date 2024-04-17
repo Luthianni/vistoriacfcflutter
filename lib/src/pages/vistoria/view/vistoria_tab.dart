@@ -18,11 +18,11 @@ class _VistoriaTab extends State<VistoriaTab> {
             'Salas',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 158, 224, 160),
+              color: Color.fromARGB(255, 106, 193, 145),
             ),
           ),
           content: const Card(
-            color: Color.fromARGB(255, 158, 224, 160),
+            color: Color.fromARGB(255, 106, 193, 145),
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
@@ -52,11 +52,11 @@ class _VistoriaTab extends State<VistoriaTab> {
             'Banheiros',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 158, 224, 160),
+              color: Color.fromARGB(255, 106, 193, 145),
             ),
           ),
           content: const Card(
-            color: Color.fromRGBO(38, 187, 55, 1.0),
+            color: Color.fromARGB(255, 106, 193, 145),
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
@@ -76,7 +76,7 @@ class _VistoriaTab extends State<VistoriaTab> {
           isActive: _activeStepIndex >= 0,
           title: const Text('Equipamentos'),
           content: const Card(
-            color: Color.fromARGB(255, 158, 224, 160),
+            color: Color.fromARGB(255, 106, 193, 145),
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
@@ -93,7 +93,7 @@ class _VistoriaTab extends State<VistoriaTab> {
           isActive: _activeStepIndex >= 0,
           title: const Text('PCD'),
           content: const Card(
-            color: Color.fromARGB(255, 158, 224, 160),
+            color: Color.fromARGB(255, 106, 193, 145),
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
@@ -110,7 +110,7 @@ class _VistoriaTab extends State<VistoriaTab> {
           isActive: _activeStepIndex >= 0,
           title: const Text('Suporte'),
           content: const Card(
-            color: Color.fromARGB(255, 158, 224, 160),
+            color: Color.fromARGB(255, 106, 193, 145),
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
@@ -137,8 +137,8 @@ class _VistoriaTab extends State<VistoriaTab> {
     final List<Step> steps = stepList();
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 171, 245, 171),
+       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 106, 193, 145),
         elevation: 0,
         centerTitle: true,
         title: const Text(
@@ -148,6 +148,11 @@ class _VistoriaTab extends State<VistoriaTab> {
             fontSize: 25,
             fontWeight: FontWeight.bold,
             color: Color.fromRGBO(255, 255, 255, 1.0),
+          ),
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20),
           ),
         ),
       ),

@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
-import 'package:logger/logger.dart'; // Adicione esta importação
+import 'package:logger/logger.dart';
 import 'package:vistoria_cfc/src/constants/storage_keys.dart';
 import 'package:vistoria_cfc/src/models/user_model.dart';
 import 'package:vistoria_cfc/src/pages/auth/repository/auth_repository.dart';
+import 'package:vistoria_cfc/src/pages/profile/controller/profile_controller.dart';
 import 'package:vistoria_cfc/src/services/utils_services.dart';
 import 'package:vistoria_cfc/src/pages/auth/result/auth_result.dart';
 import 'package:vistoria_cfc/src/pages_routes/app_pages.dart';
@@ -58,10 +59,13 @@ class AuthController extends GetxController {
     isLoading.value = false;
 
     result.when(
-      success: (user) {
+      success: (user) async{
         this.user = user;
 
         saveTokenAndProceedToBase();
+
+        ProfileController profileController = ProfileController();
+        await profileController.loadProfileData();
       },
       error: (message) {
         utilsServices.showToast(
@@ -140,41 +144,4 @@ class AuthController extends GetxController {
       },
     );
   }
-
-  // Future<void> userId() async {
-  //   String? token = await utilsServices.getLocalData(key: StorageKeys.token);
-
-  //   if (token == null) {
-  //     Get.offAllNamed(PagesRoutes.baseRoute);
-  //     return;
-  //   }
-
-  //   logger.i('Token obtido com sucesso: $token');
-
-  //   String? id = await utilsServices.getLocalData(key: StorageKeys.id);
-  //   if (id == null) {
-  //     return;
-  //   }
-
-  //   logger.i('ID do usuário obtido: $id');
-
-  //   String userIdUrl = '$baseUrl/api/v1/usuarios/$id';
-
-  //   AuthResult authResult = await authRepository.userId(token, id);
-
-  //   authResult.when(
-  //     success: (user) {
-  //       this.user = user;
-  //       logger.i('Token válido e ID de de usuário existente !!');
-  //     },
-  //     error: (message) {
-  //       utilsServices.showToast(
-  //         message: message,
-  //         isError: true,
-  //       );
-  //       logger.i(user);
-  //       Get.offAllNamed(PagesRoutes.baseRoute);
-  //     },
-  //   );
-  // }
 }

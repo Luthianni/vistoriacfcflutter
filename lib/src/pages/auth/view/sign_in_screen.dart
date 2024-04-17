@@ -20,7 +20,7 @@ class SignInScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 158, 224, 160),
+        backgroundColor: const Color.fromARGB(255, 106, 193, 145),
         toolbarHeight: 1,
         elevation: 0,
       ),
@@ -49,7 +49,7 @@ class SignInScreen extends StatelessWidget {
                         TextSpan(
                           text: 'CRT VISTORIA',
                           style: TextStyle(
-                            color: Color.fromARGB(255, 158, 224, 160),
+                            color: Color.fromARGB(255, 106, 193, 145),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -65,7 +65,7 @@ class SignInScreen extends StatelessWidget {
                         TextSpan(
                           text: 'Acesse sua conta',
                           style: TextStyle(
-                            color: Color.fromARGB(255, 158, 224, 160),
+                            color: Color.fromARGB(255, 106, 193, 145),
                           ),
                         ),
                       ],
@@ -109,7 +109,7 @@ class SignInScreen extends StatelessWidget {
                             return ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor:
-                                    const Color.fromARGB(255, 188, 228, 189),
+                                    const Color.fromARGB(255, 106, 193, 145),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),

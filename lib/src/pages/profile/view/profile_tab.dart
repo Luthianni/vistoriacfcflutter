@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vistoria_cfc/src/pages/auth/controller/auth_controller.dart';
 import 'package:vistoria_cfc/src/pages/profile/controller/profile_controller.dart';
+import 'package:brasil_fields/brasil_fields.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({Key? key}) : super(key: key);
@@ -13,6 +14,7 @@ class ProfileTab extends StatefulWidget {
 class _ProfileTabState extends State<ProfileTab> {
   final profileController = Get.find<ProfileController>();
   final authController = Get.find<AuthController>();
+  
 
   @override
   void initState() {
@@ -40,7 +42,7 @@ class _ProfileTabState extends State<ProfileTab> {
             color: const Color.fromRGBO(255, 255, 255, 1.0),
           ),
         ],
-        backgroundColor: const Color.fromARGB(255, 158, 224, 160),
+        backgroundColor: const Color.fromARGB(255, 106, 193, 145),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(20),
@@ -60,7 +62,7 @@ class _ProfileTabState extends State<ProfileTab> {
               height: MediaQuery.of(context).size.height / 1.5,
               width: MediaQuery.of(context).size.height / 2.3,
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 208, 243, 192),
+                color: const Color(0xFFF5F5F5),
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
@@ -74,21 +76,23 @@ class _ProfileTabState extends State<ProfileTab> {
               Padding(
                 padding: const EdgeInsets.only(top: 200.0, left: 50.0),
                 child: Text(
-                  " ${profileController.profile.nome ?? 'Nome não encontardo !!'}",
+                  " ${profileController.profile.nome ?? 'Nome não encontrado !!'}",
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(9, 9, 9, 1),
                   ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, right: 200.0),
                 child: Text(
-                  "CPF: ${profileController.profile.cpf ?? 'Não foi posivel encontrar o CPF !!'}",
+                  "CPF: ${UtilBrasilFields.obterCpf(profileController.profile.cpf ?? 'Não foi posivel encontrar o CPF !!')}",                  
                   textAlign: TextAlign.right,
                   style: const TextStyle(
                     fontSize: 14,
+                    color: Color.fromRGBO(9, 9, 9, 1),
                   ),
                 ),
               ),
@@ -99,6 +103,7 @@ class _ProfileTabState extends State<ProfileTab> {
                   textAlign: TextAlign.left,
                   style: const TextStyle(
                     fontSize: 14,
+                    color: Color.fromRGBO(9, 9, 9, 1),
                   ),
                 ),
               ),
@@ -109,6 +114,7 @@ class _ProfileTabState extends State<ProfileTab> {
                   textAlign: TextAlign.left,
                   style: const TextStyle(
                     fontSize: 14,
+                    color: Color.fromRGBO(9, 9, 9, 1),
                   ),
                 ),
               ),

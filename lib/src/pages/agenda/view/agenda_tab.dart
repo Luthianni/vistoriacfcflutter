@@ -21,7 +21,7 @@ class _AgendaTabSelectorState extends State<AgendaTab> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 158, 224, 160),
+        backgroundColor: const Color.fromARGB(255, 106, 193, 145),
         elevation: 0,
         centerTitle: true,
         title: const Text(

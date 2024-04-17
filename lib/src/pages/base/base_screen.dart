@@ -42,7 +42,7 @@ class _BaseScreenState extends State<BaseScreen> {
                 navigationController.navitePageView(index);
               },
               type: BottomNavigationBarType.fixed,
-              backgroundColor: const Color.fromARGB(255, 158, 224, 160),
+              backgroundColor: const Color.fromARGB(255, 106, 193, 145),
               selectedItemColor: const Color.fromRGBO(38, 187, 55, 1.0),
               unselectedItemColor: const Color.fromARGB(255, 248, 248, 248),
               items: const [

@@ -58,6 +58,7 @@ dependencies:
   shared_preferences: ^2.0.0
   json_annotation: ^4.4.0
   string_extensions: ^0.7.1
+  brasil_fields: ^1.14.1
 
 dev_dependencies:
   flutter_test:

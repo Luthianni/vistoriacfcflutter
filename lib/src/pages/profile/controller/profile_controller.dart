@@ -40,6 +40,9 @@ class ProfileController extends GetxController {
         // Sucesso: atribuir o perfil extraído do resultado
         profile = result.prof;
         logger.i('Perfil encontrado: $profile');
+        
+        // Chamar o método loadProfileData após o perfil ser carregado com sucesso
+        await loadProfileData();
       } else if (result is Error) {
         // Trate o caso em que ocorreu um erro
         logger.e('Erro ao buscar perfil: ${result.message}');
@@ -51,5 +54,8 @@ class ProfileController extends GetxController {
       // Trate qualquer exceção não tratada adequadamente aqui
       logger.e('Erro ao buscar perfil: $e');
     }
+  }
+  Future<void> loadProfileData() async {
+
   }
 }
