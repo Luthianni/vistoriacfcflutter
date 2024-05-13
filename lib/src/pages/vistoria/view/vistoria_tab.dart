@@ -4,33 +4,34 @@ class VistoriaTab extends StatefulWidget {
   const VistoriaTab({Key? key}) : super(key: key);
 
   @override
-  State<VistoriaTab> createState() => _VistoriaTab();
+  State<VistoriaTab> createState() => _VistoriaTabState();
 }
 
-class _VistoriaTab extends State<VistoriaTab> {
+class _VistoriaTabState extends State<VistoriaTab> {
   int _activeStepIndex = 0;
+  final Color customGreenColor = const Color.fromARGB(255, 106, 193, 145);
 
   List<Step> stepList() => [
         Step(
           state: _activeStepIndex <= 0 ? StepState.editing : StepState.complete,
           isActive: _activeStepIndex >= 0,
-          title: const Text(
+          title: Text(
             'Salas',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 106, 193, 145),
+              color: customGreenColor,
             ),
           ),
-          content: const Card(
-            color: Color.fromARGB(255, 106, 193, 145),
-            child: Padding(
+          content: Card(
+            color: customGreenColor,
+            child: const Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
                 children: [
                   Text(
                     'Salas',
                     style: TextStyle(
-                      color: Color.fromRGBO(255, 255, 255, 1.0),
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
                     ),
@@ -46,25 +47,33 @@ class _VistoriaTab extends State<VistoriaTab> {
           ),
         ),
         Step(
-          state: _activeStepIndex <= 0 ? StepState.editing : StepState.complete,
-          isActive: _activeStepIndex >= 0,
-          title: const Text(
+          state: _activeStepIndex <= 1 ? StepState.editing : StepState.complete,
+          isActive: _activeStepIndex >= 1,
+          title: Text(
             'Banheiros',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 106, 193, 145),
+              color: customGreenColor,
             ),
           ),
-          content: const Card(
-            color: Color.fromARGB(255, 106, 193, 145),
-            child: Padding(
+          content: Card(
+            color: customGreenColor,
+            child: const Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
                 children: [
                   Text(
-                    'Conteúdo personalizado para banheiros',
-                    style: TextStyle(color: Colors.white),
+                    'Banheiros',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                    ),
                   ),
+                  Divider(color: Colors.white, height: 25),
+                  Row(
+                    children: [],
+                  )
                   // Adicione seus widgets personalizados aqui
                 ],
               ),
@@ -72,16 +81,33 @@ class _VistoriaTab extends State<VistoriaTab> {
           ),
         ),
         Step(
-          state: _activeStepIndex <= 0 ? StepState.editing : StepState.complete,
-          isActive: _activeStepIndex >= 0,
-          title: const Text('Equipamentos'),
-          content: const Card(
-            color: Color.fromARGB(255, 106, 193, 145),
-            child: Padding(
+          state: _activeStepIndex <= 2 ? StepState.editing : StepState.complete,
+          isActive: _activeStepIndex >= 2,
+          title: Text(
+            'Equipamentos',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: customGreenColor,
+            ),
+          ),
+          content: Card(
+            color: customGreenColor,
+            child: const Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  Text('Conteúdo personalizado para Equipamentos'),
+                  Text(
+                    'Equipamentos',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                    ),
+                  ),
+                  Divider(color: Colors.white, height: 25),
+                  Row(
+                    children: [],
+                  )
                   // Adicione seus widgets personalizados aqui
                 ],
               ),
@@ -89,16 +115,33 @@ class _VistoriaTab extends State<VistoriaTab> {
           ),
         ),
         Step(
-          state: _activeStepIndex <= 0 ? StepState.editing : StepState.complete,
-          isActive: _activeStepIndex >= 0,
-          title: const Text('PCD'),
-          content: const Card(
-            color: Color.fromARGB(255, 106, 193, 145),
-            child: Padding(
+          state: _activeStepIndex <= 3 ? StepState.editing : StepState.complete,
+          isActive: _activeStepIndex >= 3,
+          title: Text(
+            'PCD',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: customGreenColor,
+            ),
+          ),
+          content: Card(
+            color: customGreenColor,
+            child: const Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  Text('Conteúdo personalizado para PCD'),
+                  Text(
+                    'PCD',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                    ),
+                  ),
+                  Divider(color: Colors.white, height: 25),
+                  Row(
+                    children: [],
+                  )
                   // Adicione seus widgets personalizados aqui
                 ],
               ),
@@ -106,16 +149,33 @@ class _VistoriaTab extends State<VistoriaTab> {
           ),
         ),
         Step(
-          state: _activeStepIndex <= 0 ? StepState.editing : StepState.complete,
-          isActive: _activeStepIndex >= 0,
-          title: const Text('Suporte'),
-          content: const Card(
-            color: Color.fromARGB(255, 106, 193, 145),
-            child: Padding(
+          state: _activeStepIndex <= 4 ? StepState.editing : StepState.complete,
+          isActive: _activeStepIndex >= 4,
+          title: Text(
+            'Suporte',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: customGreenColor,
+            ),
+          ),
+          content: Card(
+            color: customGreenColor,
+            child: const Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  Text('Conteúdo personalizado para Suporte'),
+                  Text(
+                    'Suporte',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                    ),
+                  ),
+                  Divider(color: Colors.white, height: 25),
+                  Row(
+                    children: [],
+                  )
                   // Adicione seus widgets personalizados aqui
                 ],
               ),
@@ -125,9 +185,15 @@ class _VistoriaTab extends State<VistoriaTab> {
         Step(
           state: _activeStepIndex <= 5 ? StepState.editing : StepState.complete,
           isActive: _activeStepIndex >= 5,
-          title: const Text('Concluir'),
+          title: Text(
+            'Concluir',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: customGreenColor,
+            ),
+          ),
           content: const Center(
-            child: Text('Concluir'),
+            child: Text(''),
           ),
         ),
       ];
@@ -137,8 +203,8 @@ class _VistoriaTab extends State<VistoriaTab> {
     final List<Step> steps = stepList();
 
     return Scaffold(
-       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 106, 193, 145),
+      appBar: AppBar(
+        backgroundColor: customGreenColor,
         elevation: 0,
         centerTitle: true,
         title: const Text(
@@ -147,7 +213,7 @@ class _VistoriaTab extends State<VistoriaTab> {
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.bold,
-            color: Color.fromRGBO(255, 255, 255, 1.0),
+            color: Colors.white,
           ),
         ),
         shape: const RoundedRectangleBorder(
@@ -156,28 +222,71 @@ class _VistoriaTab extends State<VistoriaTab> {
           ),
         ),
       ),
-      body: Stepper(
-        type: StepperType.vertical,
-        currentStep: _activeStepIndex,
-        steps: steps,
-        onStepContinue: () {
-          if (_activeStepIndex < (steps.length - 1)) {
-            _activeStepIndex += 1;
-          }
-          setState(() {});
-        },
-        onStepCancel: () {
-          if (_activeStepIndex == 0) {
-            return;
-          }
-          _activeStepIndex -= 1;
-          setState(() {});
-        },
-        onStepTapped: (step) {
-          setState(() {
-            _activeStepIndex = step;
-          });
-        },
+      body: Theme(
+        data: ThemeData(
+          colorScheme: ColorScheme.light(primary: customGreenColor),
+        ),
+        child: Stepper(
+          type: StepperType.vertical,
+          currentStep: _activeStepIndex,
+          steps: steps,
+          onStepContinue: () {
+            if (_activeStepIndex < (steps.length - 1)) {
+              setState(() {
+                _activeStepIndex += 1;
+              });
+            }
+          },
+          onStepCancel: () {
+            if (_activeStepIndex > 0) {
+              setState(() {
+                _activeStepIndex -= 1;
+              });
+            }
+          },
+          onStepTapped: (step) {
+            setState(() {
+              _activeStepIndex = step;
+            });
+          },
+          controlsBuilder: (BuildContext context, ControlsDetails controls) {
+            return Row(
+              children: <Widget>[
+                ElevatedButton(
+                  onPressed: controls.onStepContinue,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: customGreenColor,
+                  ),
+                  child: const Text(
+                    'CONCLUIR',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                ElevatedButton(
+                  onPressed: controls.onStepCancel,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: customGreenColor,
+                  ),
+                  child: const Text(
+                    'CANCELAR',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

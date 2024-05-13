@@ -38,13 +38,8 @@ class ProfileRepository {
       );
       logger.i('Resposta da request : $url');
       // Verifique se o resultado é uma instância de Map<String, dynamic>
-      if (result is Map<String, dynamic>) {
-        return handleProfileOrError(result);
-      } else {
-        // Trate o caso em que o resultado não é do tipo esperado
-        return ProfileResult.error('Erro: resposta inválida');
-      }
-    } on DioError catch (error) {
+      return handleProfileOrError(result);
+    } on DioError {
       return ProfileResult.error('Erro na requisição profileId');
     }
   }

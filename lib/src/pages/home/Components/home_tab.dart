@@ -26,7 +26,7 @@ class HomeTab extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 158, 224, 160),
+        backgroundColor: const Color.fromARGB(255, 106, 193, 145),
         title: Text(
           'Olá, $nomeFormatado!',
           style: const TextStyle(
