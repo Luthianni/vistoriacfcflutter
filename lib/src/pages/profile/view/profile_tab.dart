@@ -14,7 +14,6 @@ class ProfileTab extends StatefulWidget {
 class _ProfileTabState extends State<ProfileTab> {
   final profileController = Get.find<ProfileController>();
   final authController = Get.find<AuthController>();
-  
 
   @override
   void initState() {
@@ -88,7 +87,7 @@ class _ProfileTabState extends State<ProfileTab> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, right: 200.0),
                 child: Text(
-                  "CPF: ${UtilBrasilFields.obterCpf(profileController.profile.cpf ?? 'Não foi posivel encontrar o CPF !!')}",                  
+                  "CPF: ${UtilBrasilFields.obterCpf(profileController.profile.cpf ?? 'Não foi posivel encontrar o CPF !!')}",
                   textAlign: TextAlign.right,
                   style: const TextStyle(
                     fontSize: 14,
@@ -110,7 +109,7 @@ class _ProfileTabState extends State<ProfileTab> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, right: 100.0),
                 child: Text(
-                  "Telefone: ${profileController.profile.telefone ?? 'Telefone não encontrado!!'}",
+                  "Telefone: ${UtilBrasilFields.obterTelefone(profileController.profile.telefone ?? 'Telefone não encontrado!!')}",
                   textAlign: TextAlign.left,
                   style: const TextStyle(
                     fontSize: 14,

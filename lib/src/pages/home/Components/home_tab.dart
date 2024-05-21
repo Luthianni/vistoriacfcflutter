@@ -13,8 +13,7 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final AuthController authController = Get.put(AuthController());
-    final ProfileController profileController = Get.put(ProfileController());
+    final ProfileController profileController = Get.find<ProfileController>();
 
     String? nomeUsuario = profileController.profile.nome;
     List<String> partesNome = nomeUsuario?.split(' ') ?? [];

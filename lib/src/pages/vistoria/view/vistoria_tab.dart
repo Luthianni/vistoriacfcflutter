@@ -22,26 +22,25 @@ class _VistoriaTabState extends State<VistoriaTab> {
               color: customGreenColor,
             ),
           ),
-          content: Card(
-            color: customGreenColor,
-            child: const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Text(
-                    'Salas',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
+          content: GestureDetector(
+            onTap: () => _showModal('Salas'),
+            child: Card(
+              color: customGreenColor,
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Text(
+                      'Salas',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                      ),
                     ),
-                  ),
-                  Divider(color: Colors.white, height: 25),
-                  Row(
-                    children: [],
-                  )
-                  // Adicione seus widgets personalizados aqui
-                ],
+                    Divider(color: Colors.white, height: 25),
+                  ],
+                ),
               ),
             ),
           ),
@@ -56,26 +55,20 @@ class _VistoriaTabState extends State<VistoriaTab> {
               color: customGreenColor,
             ),
           ),
-          content: Card(
-            color: customGreenColor,
-            child: const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Text(
-                    'Banheiros',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
+          content: GestureDetector(
+            onTap: () => _showModal('Banheiros'),
+            child: Card(
+              color: customGreenColor,
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Text(
+                      'Conteúdo personalizado para banheiros',
+                      style: TextStyle(color: Colors.white),
                     ),
-                  ),
-                  Divider(color: Colors.white, height: 25),
-                  Row(
-                    children: [],
-                  )
-                  // Adicione seus widgets personalizados aqui
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -90,26 +83,20 @@ class _VistoriaTabState extends State<VistoriaTab> {
               color: customGreenColor,
             ),
           ),
-          content: Card(
-            color: customGreenColor,
-            child: const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Text(
-                    'Equipamentos',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
+          content: GestureDetector(
+            onTap: () => _showModal('Equipamentos'),
+            child: Card(
+              color: customGreenColor,
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Text(
+                      'Conteúdo personalizado para Equipamentos',
+                      style: TextStyle(color: Colors.white),
                     ),
-                  ),
-                  Divider(color: Colors.white, height: 25),
-                  Row(
-                    children: [],
-                  )
-                  // Adicione seus widgets personalizados aqui
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -124,26 +111,20 @@ class _VistoriaTabState extends State<VistoriaTab> {
               color: customGreenColor,
             ),
           ),
-          content: Card(
-            color: customGreenColor,
-            child: const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Text(
-                    'PCD',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
+          content: GestureDetector(
+            onTap: () => _showModal('PCD'),
+            child: Card(
+              color: customGreenColor,
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Text(
+                      'Conteúdo personalizado para PCD',
+                      style: TextStyle(color: Colors.white),
                     ),
-                  ),
-                  Divider(color: Colors.white, height: 25),
-                  Row(
-                    children: [],
-                  )
-                  // Adicione seus widgets personalizados aqui
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -158,26 +139,20 @@ class _VistoriaTabState extends State<VistoriaTab> {
               color: customGreenColor,
             ),
           ),
-          content: Card(
-            color: customGreenColor,
-            child: const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Text(
-                    'Suporte',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
+          content: GestureDetector(
+            onTap: () => _showModal('Suporte'),
+            child: Card(
+              color: customGreenColor,
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Text(
+                      'Conteúdo personalizado para Suporte',
+                      style: TextStyle(color: Colors.white),
                     ),
-                  ),
-                  Divider(color: Colors.white, height: 25),
-                  Row(
-                    children: [],
-                  )
-                  // Adicione seus widgets personalizados aqui
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -193,10 +168,62 @@ class _VistoriaTabState extends State<VistoriaTab> {
             ),
           ),
           content: const Center(
-            child: Text(''),
+            child: Text('Concluir'),
           ),
         ),
       ];
+
+  void _showModal(String stepName) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Selecione os itens para $stepName',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+              const SizedBox(height: 10),
+              // Aqui você pode adicionar uma lista de itens para selecionar
+              ListView(
+                shrinkWrap: true,
+                children: const [
+                  ListTile(
+                    title: Text('Item 1'),
+                  ),
+                  ListTile(
+                    title: Text('Item 2'),
+                  ),
+                  ListTile(
+                    title: Text('Item 3'),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: customGreenColor,
+                ),
+                child: const Text(
+                  'FECHAR',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -250,40 +277,43 @@ class _VistoriaTabState extends State<VistoriaTab> {
             });
           },
           controlsBuilder: (BuildContext context, ControlsDetails controls) {
-            return Row(
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: controls.onStepContinue,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: customGreenColor,
-                  ),
-                  child: const Text(
-                    'CONCLUIR',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+            return Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  ElevatedButton(
+                    onPressed: controls.onStepContinue,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: customGreenColor,
+                    ),
+                    child: const Text(
+                      'CONTINUAR',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 8),
-                ElevatedButton(
-                  onPressed: controls.onStepCancel,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: customGreenColor,
-                  ),
-                  child: const Text(
-                    'CANCELAR',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                  const SizedBox(width: 8),
+                  ElevatedButton(
+                    onPressed: controls.onStepCancel,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: customGreenColor,
+                    ),
+                    child: const Text(
+                      'CANCELAR',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           },
         ),

@@ -2,7 +2,7 @@
 //const String baseUrl = 'http://192.168.0.200:8080/api/v1';
 const String baseUrl = 'http://localhost:8080';
 //const String baseUrl = 'http://172.25.137.54:8080/api/v1';
-//const String baseUrl = 'http://7c47-177-22-43-111.ngrok-free.app';
+//const String baseUrl = 'http://d1b2-177-22-43-114.ngrok-free.app';
 
 abstract class Endpoints {
   // AUTH //

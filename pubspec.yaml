@@ -59,6 +59,7 @@ dependencies:
   json_annotation: ^4.4.0
   string_extensions: ^0.7.1
   brasil_fields: ^1.14.1
+  fluid_bottom_nav_bar: ^1.4.0
 
 dev_dependencies:
   flutter_test:
