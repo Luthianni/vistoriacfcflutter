@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vistoria_cfc/src/config/custom_colors.dart';
 import 'package:vistoria_cfc/src/models/vistoria_model.dart';
 import 'package:vistoria_cfc/src/pages/profile/controller/profile_controller.dart';
 import 'package:vistoria_cfc/src/pages/vistoria/components/vistoria_tile.dart';
@@ -25,11 +26,11 @@ class HomeTab extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 106, 193, 145),
+        backgroundColor: context.verdeTitulo,
         title: Text(
           'Olá, $nomeFormatado!',
           style: const TextStyle(
-            color: Color.fromRGBO(255, 255, 255, 1.0),
+            color: Color(0xFF3C5259),
             fontSize: 14,
           ),
         ),

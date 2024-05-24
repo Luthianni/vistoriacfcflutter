@@ -15,8 +15,8 @@ class SplashScreen extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              CustomColors.customSwatchColor,
-              CustomColors.customSwatchColor.shade700,
+              context.primaryGreen,
+              context.primaryGreen.withAlpha(0xFF42B58E),
             ],
           ),
         ),
@@ -24,7 +24,7 @@ class SplashScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             AppNameWidget(
-              greenTitleColor: Color.fromRGBO(255, 255, 255, 1.0),
+              greenTitleColor: Color.fromRGBO(255, 106, 193, 145),
               textSize: 40,
             ),
           ],

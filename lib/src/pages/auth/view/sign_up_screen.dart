@@ -27,7 +27,7 @@ class SignUpScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: CustomColors.customSwatchColor,
+      backgroundColor: context.primaryColor,
       body: SingleChildScrollView(
         child: SizedBox(
           height: size.height,
