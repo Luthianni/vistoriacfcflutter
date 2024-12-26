@@ -13,7 +13,7 @@ class ProfileController extends GetxController {
   final ProfileRepository _profileRepository = ProfileRepository();
   final authRepository = AuthRepository();
   final utilsServices = UtilsServices();
-  ProfileModel profile = ProfileModel();
+  Rx<ProfileModel> profile = ProfileModel().obs; // Make profile observable
 
   final logger = Logger();
 
@@ -34,12 +34,12 @@ class ProfileController extends GetxController {
 
     logger.i('Requisição bem sucedida: $token, $id');
 
-   try {
+    try {
       ProfileResult result = await _profileRepository.profileId(token!, id);
       if (result is Success) {
         // Sucesso: atribuir o perfil extraído do resultado
-        profile = result.prof;
-        logger.i('Perfil encontrado: $profile');
+        profile.value = result.prof;
+        logger.i('Perfil encontrado: ${profile.value}');
         
         // Chamar o método loadProfileData após o perfil ser carregado com sucesso
         await loadProfileData();
@@ -55,7 +55,8 @@ class ProfileController extends GetxController {
       logger.e('Erro ao buscar perfil: $e');
     }
   }
-  Future<void> loadProfileData() async {
 
+  Future<void> loadProfileData() async {
+    // Implement your logic here
   }
 }

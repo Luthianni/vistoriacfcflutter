@@ -13,6 +13,7 @@ class CustomTextField extends StatefulWidget {
   final TextEditingController? controller;
   final TextInputType? textInputType;
   final GlobalKey<FormFieldState>? formFieldKey;
+  final void Function(String)? onChanged; // Add this line
 
   const CustomTextField({
     Key? key,
@@ -27,7 +28,9 @@ class CustomTextField extends StatefulWidget {
     this.controller,
     this.textInputType,
     this.formFieldKey,
+    this.onChanged, // Add this line
   }) : super(key: key);
+
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
 }
@@ -38,7 +41,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   void initState() {
     super.initState();
-
     isObscure = widget.isSecret;
   }
 
@@ -56,6 +58,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         validator: widget.validator,
         onSaved: widget.onSaved,
         keyboardType: widget.textInputType,
+        onChanged: widget.onChanged, // Add this line
         decoration: InputDecoration(
           iconColor: const Color.fromARGB(255, 158, 224, 160),
           prefixIcon: Icon(

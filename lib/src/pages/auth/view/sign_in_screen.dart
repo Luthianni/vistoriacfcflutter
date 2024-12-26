@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:vistoria_cfc/src/pages/auth/controller/auth_controller.dart';
+
 import 'package:vistoria_cfc/src/pages/common_widgets/custom_text_field.dart';
 import 'package:vistoria_cfc/src/services/validators.dart';
 
@@ -104,7 +104,7 @@ class SignInScreen extends StatelessWidget {
                       // Botão de entrar
                       SizedBox(
                         height: 50,
-                        child: GetX<AuthController>(
+                        child: GetX<EnhancedAuthController>(
                           builder: (authController) {
                             return ElevatedButton(
                               style: ElevatedButton.styleFrom(

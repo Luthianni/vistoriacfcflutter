@@ -20,7 +20,7 @@ class SignUpScreen extends StatelessWidget {
   );
 
   final _formKey = GlobalKey<FormState>();
-  final authController = Get.find<AuthController>();
+  final authController = Get.find<EnhancedAuthController>();
 
   @override
   Widget build(BuildContext context) {

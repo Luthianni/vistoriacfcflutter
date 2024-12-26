@@ -13,7 +13,7 @@ class ProfileTab extends StatefulWidget {
 
 class _ProfileTabState extends State<ProfileTab> {
   final profileController = Get.find<ProfileController>();
-  final authController = Get.find<AuthController>();
+  final authController = Get.find<EnhancedAuthController>();
 
   @override
   void initState() {
@@ -74,48 +74,56 @@ class _ProfileTabState extends State<ProfileTab> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 200.0, left: 50.0),
-                child: Text(
-                  " ${profileController.profile.nome ?? 'Nome não encontrado !!'}",
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(9, 9, 9, 1),
-                  ),
-                ),
+                child: Obx(() {
+                  return Text(
+                    " ${profileController.profile.value.nome ?? 'Nome não encontrado !!'}",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromRGBO(9, 9, 9, 1),
+                    ),
+                  );
+                }),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, right: 200.0),
-                child: Text(
-                  "CPF: ${UtilBrasilFields.obterCpf(profileController.profile.cpf ?? 'Não foi posivel encontrar o CPF !!')}",
-                  textAlign: TextAlign.right,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Color.fromRGBO(9, 9, 9, 1),
-                  ),
-                ),
+                child: Obx(() {
+                  return Text(
+                    "CPF: ${UtilBrasilFields.obterCpf(profileController.profile.value.cpf ?? 'Não foi posivel encontrar o CPF !!')}",
+                    textAlign: TextAlign.right,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Color.fromRGBO(9, 9, 9, 1),
+                    ),
+                  );
+                }),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, right: 200.0),
-                child: Text(
-                  "Matrícula: ${profileController.profile.matricula ?? 'Não foi posivel encontrar a Matricula !!'}",
-                  textAlign: TextAlign.left,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Color.fromRGBO(9, 9, 9, 1),
-                  ),
-                ),
+                child: Obx(() {
+                  return Text(
+                    "Matrícula: ${profileController.profile.value.matricula ?? 'Não foi posivel encontrar a Matricula !!'}",
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Color.fromRGBO(9, 9, 9, 1),
+                    ),
+                  );
+                }),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, right: 100.0),
-                child: Text(
-                  "Telefone: ${UtilBrasilFields.obterTelefone(profileController.profile.telefone ?? 'Telefone não encontrado!!')}",
-                  textAlign: TextAlign.left,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Color.fromRGBO(9, 9, 9, 1),
-                  ),
-                ),
+                child: Obx(() {
+                  return Text(
+                    "Telefone: ${UtilBrasilFields.obterTelefone(profileController.profile.value.telefone ?? 'Telefone não encontrado!!')}",
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Color.fromRGBO(9, 9, 9, 1),
+                    ),
+                  );
+                }),
               ),
             ],
           ),

@@ -65,3 +65,19 @@ String? cnpjvalidator(String? cnpj) {
 
   return null;
 }
+
+String? inscricaoEstadualValidator(String? inscricaoEstadual) {
+  if (inscricaoEstadual == null || inscricaoEstadual.isEmpty) {
+    return 'Digite a inscrição estadual!';
+  }
+
+  return null;
+}
+
+String? cepValidator(String? cep) {
+  if (cep == null || cep.isEmpty) {
+    return 'Digite o CEP!';
+  }
+  
+  return null;
+}

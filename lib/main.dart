@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vistoria_cfc/src/pages/auth/controller/auth_controller.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:vistoria_cfc/src/pages/profile/controller/profile_controller.dart';
 import 'package:vistoria_cfc/src/pages_routes/app_pages.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  Get.put(AuthController());
+  Get.lazyPut(() => ProfileController());
+  Get.put(EnhancedAuthController());
 
   runApp(const MyApp());
 }

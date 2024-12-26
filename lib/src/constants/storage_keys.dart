@@ -1,4 +1,6 @@
-abstract class StorageKeys {
+class StorageKeys {
   static const String token = 'token';
-  static const String id = 'userId';
+  static const String username = 'username';
+  static const String password = 'password';
+  static const String id = 'id';
 }

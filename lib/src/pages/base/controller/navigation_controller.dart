@@ -33,7 +33,7 @@ class NavigationController extends GetxController {
     _currentIndex = currentIndex.obs;
   }
 
-  void navitePageView(int page) {
+  void navigatePageView(int page) {
     if (_currentIndex.value == page) return;
 
     _pageController.jumpToPage(page);

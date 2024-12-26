@@ -16,24 +16,26 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final ProfileController profileController = Get.find<ProfileController>();
 
-    String? nomeUsuario = profileController.profile.nome;
-    List<String> partesNome = nomeUsuario?.split(' ') ?? [];
-    String primeiroNome = partesNome.isNotEmpty ? partesNome[0] : '';
-    String ultimoNome = partesNome.length > 1 ? partesNome[1] : '';
-
-    String nomeFormatado =
-        '${StringExtension.capitalize(primeiroNome)} ${StringExtension.capitalize(ultimoNome)}';
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: context.verdeTitulo,
-        title: Text(
-          'Olá, $nomeFormatado!',
-          style: const TextStyle(
-            color: Color(0xFF3C5259),
-            fontSize: 14,
-          ),
-        ),
+        title: Obx(() {
+          String? nomeUsuario = profileController.profile.value.nome;
+          List<String> partesNome = nomeUsuario?.split(' ') ?? [];
+          String primeiroNome = partesNome.isNotEmpty ? partesNome[0] : '';
+          String ultimoNome = partesNome.length > 1 ? partesNome[1] : '';
+
+          String nomeFormatado =
+              '${StringExtension.capitalize(primeiroNome)} ${StringExtension.capitalize(ultimoNome)}';
+
+          return Text(
+            'Olá, $nomeFormatado!',
+            style: const TextStyle(
+              color: Color(0xFF3C5259),
+              fontSize: 14,
+            ),
+          );
+        }),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(20),
