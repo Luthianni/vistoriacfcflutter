@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'auth_result.dart';
+part of 'schedule_result.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,22 +15,22 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$AuthResult {
+mixin _$ScheduleResult {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserModel user) success,
+    required TResult Function(ScheduleModel sch) success,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(UserModel user)? success,
+    TResult? Function(ScheduleModel sch)? success,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserModel user)? success,
+    TResult Function(ScheduleModel sch)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -57,23 +57,23 @@ mixin _$AuthResult {
 }
 
 /// @nodoc
-abstract class $AuthResultCopyWith<$Res> {
-  factory $AuthResultCopyWith(
-          AuthResult value, $Res Function(AuthResult) then) =
-      _$AuthResultCopyWithImpl<$Res, AuthResult>;
+abstract class $ScheduleResultCopyWith<$Res> {
+  factory $ScheduleResultCopyWith(
+          ScheduleResult value, $Res Function(ScheduleResult) then) =
+      _$ScheduleResultCopyWithImpl<$Res, ScheduleResult>;
 }
 
 /// @nodoc
-class _$AuthResultCopyWithImpl<$Res, $Val extends AuthResult>
-    implements $AuthResultCopyWith<$Res> {
-  _$AuthResultCopyWithImpl(this._value, this._then);
+class _$ScheduleResultCopyWithImpl<$Res, $Val extends ScheduleResult>
+    implements $ScheduleResultCopyWith<$Res> {
+  _$ScheduleResultCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AuthResult
+  /// Create a copy of ScheduleResult
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -83,29 +83,29 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({UserModel user});
+  $Res call({ScheduleModel sch});
 }
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$AuthResultCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$ScheduleResultCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AuthResult
+  /// Create a copy of ScheduleResult
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = null,
+    Object? sch = null,
   }) {
     return _then(_$SuccessImpl(
-      null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
+      null == sch
+          ? _value.sch
+          : sch // ignore: cast_nullable_to_non_nullable
+              as ScheduleModel,
     ));
   }
 }
@@ -113,14 +113,14 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements Success {
-  _$SuccessImpl(this.user);
+  _$SuccessImpl(this.sch);
 
   @override
-  final UserModel user;
+  final ScheduleModel sch;
 
   @override
   String toString() {
-    return 'AuthResult.success(user: $user)';
+    return 'ScheduleResult.success(sch: $sch)';
   }
 
   @override
@@ -128,13 +128,13 @@ class _$SuccessImpl implements Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.sch, sch) || other.sch == sch));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
+  int get hashCode => Object.hash(runtimeType, sch);
 
-  /// Create a copy of AuthResult
+  /// Create a copy of ScheduleResult
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -145,30 +145,30 @@ class _$SuccessImpl implements Success {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserModel user) success,
+    required TResult Function(ScheduleModel sch) success,
     required TResult Function(String message) error,
   }) {
-    return success(user);
+    return success(sch);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(UserModel user)? success,
+    TResult? Function(ScheduleModel sch)? success,
     TResult? Function(String message)? error,
   }) {
-    return success?.call(user);
+    return success?.call(sch);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserModel user)? success,
+    TResult Function(ScheduleModel sch)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(user);
+      return success(sch);
     }
     return orElse();
   }
@@ -205,12 +205,12 @@ class _$SuccessImpl implements Success {
   }
 }
 
-abstract class Success implements AuthResult {
-  factory Success(final UserModel user) = _$SuccessImpl;
+abstract class Success implements ScheduleResult {
+  factory Success(final ScheduleModel sch) = _$SuccessImpl;
 
-  UserModel get user;
+  ScheduleModel get sch;
 
-  /// Create a copy of AuthResult
+  /// Create a copy of ScheduleResult
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
@@ -228,13 +228,13 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$AuthResultCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$ScheduleResultCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AuthResult
+  /// Create a copy of ScheduleResult
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -260,7 +260,7 @@ class _$ErrorImpl implements Error {
 
   @override
   String toString() {
-    return 'AuthResult.error(message: $message)';
+    return 'ScheduleResult.error(message: $message)';
   }
 
   @override
@@ -274,7 +274,7 @@ class _$ErrorImpl implements Error {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  /// Create a copy of AuthResult
+  /// Create a copy of ScheduleResult
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -285,7 +285,7 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserModel user) success,
+    required TResult Function(ScheduleModel sch) success,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -294,7 +294,7 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(UserModel user)? success,
+    TResult? Function(ScheduleModel sch)? success,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -303,7 +303,7 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserModel user)? success,
+    TResult Function(ScheduleModel sch)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -345,12 +345,12 @@ class _$ErrorImpl implements Error {
   }
 }
 
-abstract class Error implements AuthResult {
+abstract class Error implements ScheduleResult {
   factory Error(final String message) = _$ErrorImpl;
 
   String get message;
 
-  /// Create a copy of AuthResult
+  /// Create a copy of ScheduleResult
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>

@@ -38,7 +38,7 @@ class ProfileController extends GetxController {
       ProfileResult result = await _profileRepository.profileId(token!, id);
       if (result is Success) {
         // Sucesso: atribuir o perfil extraído do resultado
-        profile.value = result.prof;
+        profile.value = result.profile;
         logger.i('Perfil encontrado: ${profile.value}');
         
         // Chamar o método loadProfileData após o perfil ser carregado com sucesso

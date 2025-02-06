@@ -126,6 +126,7 @@ class SignInScreen extends StatelessWidget {
                                         authController.signIn(
                                           username: username,
                                           password: password,
+                                          context: context,
                                         );
                                       }
                                     },

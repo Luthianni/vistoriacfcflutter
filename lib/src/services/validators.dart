@@ -46,6 +46,18 @@ String? phoneValidator(String? phone) {
   return null;
 }
 
+String? telephoneValidator(String? telephone) {
+  if (telephone == null || telephone.isEmpty) {
+    return 'Digite um telefone!';
+  }
+
+  if (telephone.length < 13 || !telephone.isPhoneNumber) {
+    return 'Digite um número válido!';
+  }
+
+  return null;
+}
+
 String? cpfvalidator(String? cpf) {
   if (cpf == null || cpf.isEmpty) {
     return 'Digite um CPF!';

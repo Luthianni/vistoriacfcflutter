@@ -5,25 +5,22 @@ import 'package:vistoria_cfc/src/models/user_model.dart';
 import 'package:vistoria_cfc/src/pages/auth/repository/auth_status.dart';
 import 'package:vistoria_cfc/src/pages/auth/repository/auth_repository.dart';
 import 'package:vistoria_cfc/src/pages/profile/controller/profile_controller.dart';
-import 'package:vistoria_cfc/src/services/utils_services.dart';
-import 'package:vistoria_cfc/src/pages/auth/result/auth_result.dart';
 import 'package:vistoria_cfc/src/pages_routes/app_pages.dart';
+import 'package:vistoria_cfc/src/pages/auth/result/auth_result.dart';
+import 'package:vistoria_cfc/src/services/utils_services.dart';
+import 'package:flutter/material.dart';
 
 class EnhancedAuthController extends GetxController {
-  // Estados Observáveis
   final RxBool isLoading = false.obs;
   final RxString errorMessage = ''.obs;
   final Rx<AuthStatus> authStatus = AuthStatus.unauthenticated.obs;
 
-  // Dependências
   final AuthRepository _authRepository;
   final UtilsServices _utilsServices;
   final Logger _logger;
 
-  // Estado do usuário
   UserModel user = UserModel();
 
-  // Construtor com injeção de dependências
   EnhancedAuthController({
     AuthRepository? authRepository,
     UtilsServices? utilsServices,
@@ -33,20 +30,27 @@ class EnhancedAuthController extends GetxController {
         _logger = logger ?? Logger();
 
   @override
-  void onInit() {
-    super.onInit();
-    validateToken();
-  }
+void onInit() {
+  super.onInit();
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    if (Get.context != null) {
+      validateToken(Get.context!);
+    } else {
+      _logger.e('Contexto não disponível durante a inicialização.');
+      _handleUnauthenticated();
+    }
+  });
+}
 
-  // Método de validação de token com tratamento de erros aprimorado
-  Future<void> validateToken() async {
+
+  Future<void> validateToken(BuildContext context) async {
     try {
       authStatus.value = AuthStatus.authenticating;
-      
-      String? token = await _utilsServices.getLocalData(key: StorageKeys.token);
-      String? username = await _utilsServices.getLocalData(key: StorageKeys.username);
-      String? password = await _utilsServices.getLocalData(key: StorageKeys.password);
-      
+
+      final token = await _utilsServices.getLocalData(key: StorageKeys.token);
+      final username = await _utilsServices.getLocalData(key: StorageKeys.username);
+      final password = await _utilsServices.getLocalData(key: StorageKeys.password);
+
       if (token == null || username == null || password == null) {
         _handleUnauthenticated();
         return;
@@ -54,159 +58,163 @@ class EnhancedAuthController extends GetxController {
 
       _logger.i('Validando token: $token');
 
-      AuthResult result = await _authRepository.validateToken(
+      final result = await _authRepository.validateToken(
         token: token,
         username: username,
         password: password,
+        context: context,
       );
 
-      result.when(
-        success: (authenticatedUser) {
-          _handleSuccessfulAuthentication(authenticatedUser);
-        },
-        error: (message) {
-          _handleAuthenticationError(message);
-        },
-      );
+      _handleAuthResult(result, context);
     } catch (e) {
-      _handleUnexpectedError(e);
+      _handleUnexpectedError(e, context);
     }
   }
 
-  // Método de login com tratamento de erros detalhado
   Future<void> signIn({
     required String username,
     required String password,
+    required BuildContext context,
   }) async {
     try {
-      isLoading.value = true;
-      authStatus.value = AuthStatus.authenticating;
-      errorMessage.value = '';
+      _startLoading();
 
-      AuthResult result = await _authRepository.signIn(
+      final result = await _authRepository.signIn(
         username: username,
         password: password,
+        context: context,
       );
 
-      result.when(
-        success: (authenticatedUser) async {
-          user = authenticatedUser;
-          
-          // Verificar se o ProfileController está registrado
-          if (!Get.isRegistered<ProfileController>()) {
-            Get.put(ProfileController()); // Registrar o ProfileController, se necessário
-          }
-
-          final profileController = Get.find<ProfileController>();
-          await profileController.loadProfileData();
-
-          _handleSuccessfulAuthentication(authenticatedUser);
-        },
-        error: (message) {
-          _handleAuthenticationError(message);
-        },
-      );
+      _handleAuthResult(result, context);
     } catch (e) {
-      _handleUnexpectedError(e);
+      _handleUnexpectedError(e, context);
     } finally {
-      isLoading.value = false;
+      _stopLoading();
     }
   }
 
-  // Método de registro com tratamento de erros
-  Future<void> signUp() async {
+  Future<void> signUp(BuildContext context) async {
     try {
-      isLoading.value = true;
-      authStatus.value = AuthStatus.authenticating;
-      errorMessage.value = '';
+      _startLoading();
 
-      AuthResult result = await _authRepository.signUp(user);
-
-      result.when(
-        success: (registeredUser) {
-          user = registeredUser;
-          _handleSuccessfulAuthentication(registeredUser);
-        },
-        error: (message) {
-          _handleAuthenticationError(message);
-        },
+      final result = await _authRepository.signUp(
+        user: user,
+        context: context,
       );
+
+      _handleAuthResult(result, context);
     } catch (e) {
-      _handleUnexpectedError(e);
+      _handleUnexpectedError(e, context);
     } finally {
-      isLoading.value = false;
+      _stopLoading();
     }
   }
 
-  // Tratamento de autenticação bem-sucedida
-  void _handleSuccessfulAuthentication(UserModel authenticatedUser) {
+  Future<void> signOut(BuildContext context) async {
+    try {
+      user = UserModel();
+      await _utilsServices.removeLocalData(key: StorageKeys.token);
+      await _utilsServices.removeLocalData(key: StorageKeys.id);
+      await _utilsServices.removeLocalData(key: StorageKeys.username);
+      await _utilsServices.removeLocalData(key: StorageKeys.password);
+
+      authStatus.value = AuthStatus.unauthenticated;
+      Get.offAllNamed(PagesRoutes.signInRoute);
+
+      _utilsServices.showGlobalToast(
+        context: context,
+        message: 'Logout realizado com sucesso!',
+        isError: false,
+      );
+    } catch (e) {
+      _logger.e('Erro durante o logout: $e');
+      _utilsServices.showGlobalToast(
+        context: context,
+        message: 'Erro ao fazer logout',
+        isError: true,
+      );
+    }
+  }
+
+  void _handleAuthResult(AuthResult result, BuildContext context) {
+    result.when(
+      success: (authenticatedUser) {
+        user = authenticatedUser;
+        _handleSuccessfulAuthentication(authenticatedUser, context);
+        _utilsServices.showGlobalToast(
+          context: context,
+          message: 'Login realizada com sucesso!',
+          isError: false,
+        );
+      },
+      error: (message) {
+        _handleAuthenticationError(message, context);
+      },
+    );
+  }
+
+  void _handleSuccessfulAuthentication(UserModel authenticatedUser, BuildContext context) {
     _utilsServices.saveLocalData(
-      key: StorageKeys.token, 
-      data: authenticatedUser.token!
+      key: StorageKeys.token,
+      data: authenticatedUser.token!,
     );
 
     if (authenticatedUser.id != null) {
       _utilsServices.saveLocalData(
-        key: StorageKeys.id, 
-        data: authenticatedUser.id.toString()
+        key: StorageKeys.id,
+        data: authenticatedUser.id.toString(),
       );
     }
 
     authStatus.value = AuthStatus.authenticated;
     Get.offAllNamed(PagesRoutes.baseRoute);
+
+    if (!Get.isRegistered<ProfileController>()) {
+      Get.put(ProfileController());
+    }
+    Get.find<ProfileController>().loadProfileData();
   }
 
-  // Tratamento de erro de autenticação
-  void _handleAuthenticationError(String message) {
+  void _handleAuthenticationError(String message, BuildContext context) {
     authStatus.value = AuthStatus.error;
     errorMessage.value = message;
-    
-    _utilsServices.showToast(
+
+    _utilsServices.showGlobalToast(
+      context: context,
       message: message,
       isError: true,
     );
 
-    // Se o erro for crítico, faz logout
-    if (message.contains('Token inválido') || 
-        message.contains('Sem permissão')) {
-      signOut();
+    if (message.contains('Token inválido') || message.contains('Sem permissão')) {
+      signOut(context);
     }
   }
 
-  // Tratamento de erros inesperados
-  void _handleUnexpectedError(dynamic error) {
-    _logger.e('Erro inesperado de autenticação: $error');
-    
+  void _handleUnexpectedError(dynamic error, BuildContext context) {
+    _logger.e('Erro inesperado: $error');
+
     authStatus.value = AuthStatus.error;
     errorMessage.value = 'Erro inesperado. Tente novamente.';
-    
-    _utilsServices.showToast(
+
+    _utilsServices.showGlobalToast(
+      context: context,
       message: 'Erro inesperado. Tente novamente.',
       isError: true,
     );
   }
 
-  // Lidar com estado não autenticado
   void _handleUnauthenticated() {
     authStatus.value = AuthStatus.unauthenticated;
     Get.offAllNamed(PagesRoutes.signInRoute);
   }
 
-  // Método de logout
-  Future<void> signOut() async {
-    try {
-      user = UserModel();
-      await _utilsServices.removeLocalData(key: StorageKeys.token);
-      await _utilsServices.removeLocalData(key: StorageKeys.id);
-      
-      authStatus.value = AuthStatus.unauthenticated;
-      Get.offAllNamed(PagesRoutes.signInRoute);
-    } catch (e) {
-      _logger.e('Erro durante o logout: $e');
-      _utilsServices.showToast(
-        message: 'Erro ao fazer logout',
-        isError: true,
-      );
-    }
+  void _startLoading() {
+    isLoading.value = true;
+    authStatus.value = AuthStatus.authenticating;
+    errorMessage.value = '';
+  }
+
+  void _stopLoading() {
+    isLoading.value = false;
   }
 }

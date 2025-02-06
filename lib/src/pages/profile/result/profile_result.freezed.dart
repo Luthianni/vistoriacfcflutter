@@ -18,19 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ProfileResult {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ProfileModel prof) success,
+    required TResult Function(ProfileModel profile) success,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ProfileModel prof)? success,
+    TResult? Function(ProfileModel profile)? success,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ProfileModel prof)? success,
+    TResult Function(ProfileModel profile)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -72,6 +72,9 @@ class _$ProfileResultCopyWithImpl<$Res, $Val extends ProfileResult>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of ProfileResult
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -80,7 +83,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ProfileModel prof});
+  $Res call({ProfileModel profile});
 }
 
 /// @nodoc
@@ -91,15 +94,17 @@ class __$$SuccessImplCopyWithImpl<$Res>
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProfileResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? prof = null,
+    Object? profile = null,
   }) {
     return _then(_$SuccessImpl(
-      null == prof
-          ? _value.prof
-          : prof // ignore: cast_nullable_to_non_nullable
+      null == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
               as ProfileModel,
     ));
   }
@@ -108,14 +113,14 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements Success {
-  _$SuccessImpl(this.prof);
+  _$SuccessImpl(this.profile);
 
   @override
-  final ProfileModel prof;
+  final ProfileModel profile;
 
   @override
   String toString() {
-    return 'ProfileResult.success(prof: $prof)';
+    return 'ProfileResult.success(profile: $profile)';
   }
 
   @override
@@ -123,13 +128,15 @@ class _$SuccessImpl implements Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.prof, prof) || other.prof == prof));
+            (identical(other.profile, profile) || other.profile == profile));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, prof);
+  int get hashCode => Object.hash(runtimeType, profile);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProfileResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
@@ -138,30 +145,30 @@ class _$SuccessImpl implements Success {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ProfileModel prof) success,
+    required TResult Function(ProfileModel profile) success,
     required TResult Function(String message) error,
   }) {
-    return success(prof);
+    return success(profile);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ProfileModel prof)? success,
+    TResult? Function(ProfileModel profile)? success,
     TResult? Function(String message)? error,
   }) {
-    return success?.call(prof);
+    return success?.call(profile);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ProfileModel prof)? success,
+    TResult Function(ProfileModel profile)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(prof);
+      return success(profile);
     }
     return orElse();
   }
@@ -199,10 +206,13 @@ class _$SuccessImpl implements Success {
 }
 
 abstract class Success implements ProfileResult {
-  factory Success(final ProfileModel prof) = _$SuccessImpl;
+  factory Success(final ProfileModel profile) = _$SuccessImpl;
 
-  ProfileModel get prof;
-  @JsonKey(ignore: true)
+  ProfileModel get profile;
+
+  /// Create a copy of ProfileResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -224,6 +234,8 @@ class __$$ErrorImplCopyWithImpl<$Res>
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProfileResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -262,7 +274,9 @@ class _$ErrorImpl implements Error {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProfileResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
@@ -271,7 +285,7 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ProfileModel prof) success,
+    required TResult Function(ProfileModel profile) success,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -280,7 +294,7 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ProfileModel prof)? success,
+    TResult? Function(ProfileModel profile)? success,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -289,7 +303,7 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ProfileModel prof)? success,
+    TResult Function(ProfileModel profile)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -335,7 +349,10 @@ abstract class Error implements ProfileResult {
   factory Error(final String message) = _$ErrorImpl;
 
   String get message;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ProfileResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

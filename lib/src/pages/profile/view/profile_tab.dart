@@ -35,7 +35,7 @@ class _ProfileTabState extends State<ProfileTab> {
         actions: [
           IconButton(
             onPressed: () {
-              authController.signOut();
+              authController.signOut(context);
             },
             icon: const Icon(Icons.logout),
             color: const Color.fromRGBO(255, 255, 255, 1.0),

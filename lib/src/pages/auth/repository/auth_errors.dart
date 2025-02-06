@@ -1,15 +1,10 @@
 String authErrorsString(String? code) {
-  switch (code) {
-    case "BAD_REQUEST":
-      return 'Username e/ou senha inválidos';
+  const errorMessages = {
+    "BAD_REQUEST": 'Username e/ou senha inválidos',
+    "Invalid session token": 'Token inválido',
+    '"Http status error [401]"': 'Sem permissão',
+  };
 
-    case 'Invalid session token':
-      return 'Token inválido';
-
-    case '"Http status error [401]"':
-      return 'Sem Permissão';
-
-    default:
-      return 'Um erro indefinido ocorreu';
-  }
+  return errorMessages[code] ?? 'Um erro indefinido ocorreu';
 }
+
