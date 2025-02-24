@@ -30,26 +30,24 @@ class EnhancedAuthController extends GetxController {
         _logger = logger ?? Logger();
 
   @override
-void onInit() {
-  super.onInit();
-  WidgetsBinding.instance.addPostFrameCallback((_) {
-    if (Get.context != null) {
-      validateToken(Get.context!);
-    } else {
-      _logger.e('Contexto não disponível durante a inicialização.');
-      _handleUnauthenticated();
-    }
-  });
-}
-
+  void onInit() {
+    super.onInit();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      if (Get.context != null) {
+        validateToken(Get.context!);
+      }
+    });
+  }
 
   Future<void> validateToken(BuildContext context) async {
     try {
       authStatus.value = AuthStatus.authenticating;
 
       final token = await _utilsServices.getLocalData(key: StorageKeys.token);
-      final username = await _utilsServices.getLocalData(key: StorageKeys.username);
-      final password = await _utilsServices.getLocalData(key: StorageKeys.password);
+      final username =
+          await _utilsServices.getLocalData(key: StorageKeys.username);
+      final password =
+          await _utilsServices.getLocalData(key: StorageKeys.password);
 
       if (token == null || username == null || password == null) {
         _handleUnauthenticated();
@@ -153,16 +151,17 @@ void onInit() {
     );
   }
 
-  void _handleSuccessfulAuthentication(UserModel authenticatedUser, BuildContext context) {
+  void _handleSuccessfulAuthentication(
+      UserModel authenticatedUser, BuildContext context) {
     _utilsServices.saveLocalData(
       key: StorageKeys.token,
       data: authenticatedUser.token!,
     );
 
-    if (authenticatedUser.id != null) {
+    if (authenticatedUser.token != null) {
       _utilsServices.saveLocalData(
-        key: StorageKeys.id,
-        data: authenticatedUser.id.toString(),
+        key: StorageKeys.token,
+        data: authenticatedUser.token!,
       );
     }
 
@@ -185,7 +184,8 @@ void onInit() {
       isError: true,
     );
 
-    if (message.contains('Token inválido') || message.contains('Sem permissão')) {
+    if (message.contains('Token inválido') ||
+        message.contains('Sem permissão')) {
       signOut(context);
     }
   }

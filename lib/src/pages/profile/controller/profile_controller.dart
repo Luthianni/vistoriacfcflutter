@@ -40,7 +40,7 @@ class ProfileController extends GetxController {
         // Sucesso: atribuir o perfil extraído do resultado
         profile.value = result.profile;
         logger.i('Perfil encontrado: ${profile.value}');
-        
+
         // Chamar o método loadProfileData após o perfil ser carregado com sucesso
         await loadProfileData();
       } else if (result is Error) {
@@ -58,5 +58,11 @@ class ProfileController extends GetxController {
 
   Future<void> loadProfileData() async {
     // Implement your logic here
+  }
+
+  void updateProfileImage(String imagePath) {
+    profile.update((val) {
+      val?.foto = imagePath;
+    });
   }
 }

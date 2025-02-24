@@ -2,7 +2,7 @@ name: vistoria_cfc
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
+  sdk: ">=2.19.6 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -38,20 +38,14 @@ dependencies:
   logger: 2.0.2+1
   path_provider_android: ^2.2.1
   awesome_snackbar_content: ^0.1.2
-  
-  
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   animated_text_kit: ^4.2.2
   flutter_native_splash: ^2.2.17
   provider: ^6.0.5
-  email_validator: '^2.1.17'
+  email_validator: "^2.1.17"
   get: ^4.6.6
   mask_text_input_formatter: ^2.7.0
-  dio: ^4.0.6  
+  dio: ^4.0.6
   flutter_secure_storage: ^9.0.0
   fluttertoast: ^8.0.2
   intl: ^0.19.0
@@ -72,9 +66,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.13.1
-  json_serializable: ^6.1.5  
+  json_serializable: ^6.1.5
   build_runner: ^2.3.3
-  
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -88,7 +81,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -96,17 +88,16 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - assets/fundo_device.png
-     - assets/logo.png
-     - assets/avatar.png
-     - assets/cfcs/
-     - assets/barra_gov.png
-     - assets/logo_gov.png
-
+    - assets/fundo_device.png
+    - assets/logo.png
+    - assets/avatar.png
+    - assets/cfcs/
+    - assets/barra_gov.png
+    - assets/logo_gov.png
 
 flutter_launcher_icons:
-   android: "launcher_icon"
-   ios: false
-   image_path: "assets/logo.png"
-   min_sdk_android: 16
-   remove_alpha_ios: true
+  android: "launcher_icon"
+  ios: false
+  image_path: "assets/logo.png"
+  min_sdk_android: 16
+  remove_alpha_ios: true

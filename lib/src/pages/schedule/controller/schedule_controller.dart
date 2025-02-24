@@ -34,8 +34,6 @@ class ScheduleController extends GetxController {
     data: DateTime.now(),
   ).obs; // Make schedule observable
 
-  
-
   @override
   void onInit() {
     super.onInit();
@@ -101,66 +99,63 @@ class ScheduleController extends GetxController {
   }
 
   Future<void> createSchedule(ScheduleModel agendamento) async {
-  String? token = await utilsServices.getLocalData(key: StorageKeys.token);
+    String? token = await utilsServices.getLocalData(key: StorageKeys.token);
 
-  if (token == null) {
-    Get.offAllNamed(PagesRoutes.baseRoute);
-    return;
-  }
+    if (token == null) {
+      Get.offAllNamed(PagesRoutes.baseRoute);
+      return;
+    }
 
-  logger.i('Enviando agendamento: $agendamento');
+    logger.i('Enviando agendamento: $agendamento');
 
-   
-  
-  try {
-    isLoading.value = true;
-    final result = await _scheduleRepository.createSchedule(token, agendamento);
-    isLoading.value = false;
+    try {
+      isLoading.value = true;
+      final result =
+          await _scheduleRepository.createSchedule(token, agendamento);
+      isLoading.value = false;
 
-    if (result is Success) {
-      logger.i('Agendamento enviado com sucesso');
-      Get.snackbar(
-        'Sucesso',
-        'Agendamento enviado com sucesso',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-      );
-    } else if (result is Error) {
-      logger.e('Erro ao enviar agendamento: ${result.message}');
+      if (result is Success) {
+        logger.i('Agendamento enviado com sucesso');
+        Get.snackbar(
+          'Sucesso',
+          'Agendamento enviado com sucesso',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
+      } else if (result is Error) {
+        logger.e('Erro ao enviar agendamento: ${result.message}');
+        Get.snackbar(
+          'Erro',
+          'Erro ao enviar agendamento: ${result.message}',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
+      } else {
+        logger.e('Erro: resultado inesperado');
+        Get.snackbar(
+          'Erro',
+          'Erro: resultado inesperado',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
+      }
+    } catch (e) {
+      isLoading.value = false;
+      logger.e('Erro ao enviar agendamento: $e');
       Get.snackbar(
         'Erro',
-        'Erro ao enviar agendamento: ${result.message}',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
-    } else {
-      logger.e('Erro: resultado inesperado');
-      Get.snackbar(
-        'Erro',
-        'Erro: resultado inesperado',
+        'Erro ao enviar agendamento. Tente novamente mais tarde.',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
     }
-  } catch (e) {
-    isLoading.value = false;
-    logger.e('Erro ao enviar agendamento: $e');
-    Get.snackbar(
-      'Erro',
-      'Erro ao enviar agendamento. Tente novamente mais tarde.',
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.red,
-      colorText: Colors.white,
-    );
   }
-}
-
 
   Future<void> loadScheduleData() async {
-  
     logger.i('Carregando dados adicionais do agendamento...');
   }
 }

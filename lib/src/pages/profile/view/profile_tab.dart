@@ -1,153 +1,192 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vistoria_cfc/src/pages/auth/controller/auth_controller.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:vistoria_cfc/src/pages/profile/controller/profile_controller.dart';
-import 'package:brasil_fields/brasil_fields.dart';
+import 'dart:io';
 
-class ProfileTab extends StatefulWidget {
-  const ProfileTab({Key? key}) : super(key: key);
+class ProfileTab extends StatelessWidget {
+  final ProfileController profileController = Get.find<ProfileController>();
+  final ImagePicker _picker = ImagePicker();
 
-  @override
-  State<ProfileTab> createState() => _ProfileTabState();
-}
-
-class _ProfileTabState extends State<ProfileTab> {
-  final profileController = Get.find<ProfileController>();
-  final authController = Get.find<EnhancedAuthController>();
-
-  @override
-  void initState() {
-    super.initState();
-
-    profileController.profileId();
+  Future<void> _pickImage() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      profileController.updateProfileImage(image.path);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 106, 193, 145),
+        elevation: 0,
+        centerTitle: true,
         title: const Text(
-          'Perfil do usuário',
+          'Perfil',
+          textAlign: TextAlign.center,
           style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
             color: Color.fromRGBO(255, 255, 255, 1.0),
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              authController.signOut(context);
-            },
-            icon: const Icon(Icons.logout),
-            color: const Color.fromRGBO(255, 255, 255, 1.0),
-          ),
-        ],
-        backgroundColor: const Color.fromARGB(255, 106, 193, 145),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(20),
           ),
         ),
       ),
-      backgroundColor: const Color.fromRGBO(255, 255, 255, 1.0),
-      body: Stack(
-        alignment: Alignment.topCenter, // Alinha a Stack no topo do corpo
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-                top: 05.0), // Espaço entre a AppBar e o primeiro Container
-            child: Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(30.0),
-              height: MediaQuery.of(context).size.height / 1.5,
-              width: MediaQuery.of(context).size.height / 2.3,
-              decoration: BoxDecoration(
-                color: const Color(0xFFF5F5F5),
-                borderRadius: BorderRadius.circular(10),
-              ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Card(
+          color: Colors.white,
+          elevation: 5,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Obx(() {
+                      return CircleAvatar(
+                        radius: 50,
+                        backgroundImage:
+                            profileController.profile.value.foto != null
+                                ? FileImage(
+                                    File(profileController.profile.value.foto!))
+                                : const AssetImage('assets/avatar.png')
+                                    as ImageProvider,
+                      );
+                    }),
+                    IconButton(
+                      icon: const Icon(Icons.camera_alt),
+                      onPressed: _pickImage,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Obx(() {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextFormField(
+                        initialValue: profileController.profile.value.nome,
+                        decoration: const InputDecoration(
+                          labelText: 'Nome',
+                          floatingLabelBehavior: FloatingLabelBehavior.always,
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 240, 238, 238),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide.none,
+                          ),
+                          labelStyle:
+                              TextStyle(color: Color.fromARGB(255, 39, 39, 39)),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                        ),
+                        readOnly: true,
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: TextFormField(
+                              initialValue: profileController.profile.value.cpf,
+                              decoration: const InputDecoration(
+                                labelText: 'CPF',
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.always,
+                                filled: true,
+                                fillColor: Color.fromARGB(255, 240, 238, 238),
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                  borderSide: BorderSide.none,
+                                ),
+                                labelStyle: TextStyle(
+                                    color: Color.fromARGB(255, 39, 39, 39)),
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 10),
+                              ),
+                              readOnly: true,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            flex: 1,
+                            child: TextFormField(
+                              initialValue:
+                                  profileController.profile.value.matricula,
+                              decoration: const InputDecoration(
+                                labelText: 'Matrícula',
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.always,
+                                filled: true,
+                                fillColor: Color.fromARGB(255, 240, 238, 238),
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                  borderSide: BorderSide.none,
+                                ),
+                                labelStyle: TextStyle(color: Colors.black),
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 10),
+                              ),
+                              readOnly: true,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        initialValue: profileController.profile.value.email,
+                        decoration: const InputDecoration(
+                          labelText: 'Email',
+                          floatingLabelBehavior: FloatingLabelBehavior.always,
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 240, 238, 238),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide.none,
+                          ),
+                          labelStyle:
+                              TextStyle(color: Color.fromARGB(255, 39, 39, 39)),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                        ),
+                        readOnly: true,
+                      ),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        initialValue: profileController.profile.value.telefone,
+                        decoration: const InputDecoration(
+                          labelText: 'Telefone',
+                          floatingLabelBehavior: FloatingLabelBehavior.always,
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 240, 238, 238),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide.none,
+                          ),
+                          labelStyle:
+                              TextStyle(color: Color.fromARGB(255, 39, 39, 39)),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                        ),
+                        readOnly: true,
+                      ),
+                    ],
+                  );
+                }),
+              ],
             ),
           ),
-          const Divider(
-            color: Colors.transparent,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 200.0, left: 50.0),
-                child: Obx(() {
-                  return Text(
-                    " ${profileController.profile.value.nome ?? 'Nome não encontrado !!'}",
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromRGBO(9, 9, 9, 1),
-                    ),
-                  );
-                }),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0, right: 200.0),
-                child: Obx(() {
-                  return Text(
-                    "CPF: ${UtilBrasilFields.obterCpf(profileController.profile.value.cpf ?? 'Não foi posivel encontrar o CPF !!')}",
-                    textAlign: TextAlign.right,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Color.fromRGBO(9, 9, 9, 1),
-                    ),
-                  );
-                }),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0, right: 200.0),
-                child: Obx(() {
-                  return Text(
-                    "Matrícula: ${profileController.profile.value.matricula ?? 'Não foi posivel encontrar a Matricula !!'}",
-                    textAlign: TextAlign.left,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Color.fromRGBO(9, 9, 9, 1),
-                    ),
-                  );
-                }),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0, right: 100.0),
-                child: Obx(() {
-                  return Text(
-                    "Telefone: ${UtilBrasilFields.obterTelefone(profileController.profile.value.telefone ?? 'Telefone não encontrado!!')}",
-                    textAlign: TextAlign.left,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Color.fromRGBO(9, 9, 9, 1),
-                    ),
-                  );
-                }),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0, left: 20.0),
-            child: Container(
-              alignment: Alignment.center,
-              height: MediaQuery.of(context).size.height / 6,
-              width: MediaQuery.of(context).size.width / 4,
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(255, 255, 255, 1.0),
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 25.0,
-                    spreadRadius: 2,
-                  )
-                ],
-              ),
-              child: const Image(image: AssetImage('assets/avatar.png')),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

@@ -181,7 +181,7 @@ class _AgendaTabSelectorState extends State<AgendaTab> {
                           icon: Icons.format_list_numbered,
                           validator: cnpjvalidator,
                           label: 'CNPJ',
-                          textInputType: TextInputType.number,                          
+                          textInputType: TextInputType.number,
                           onFieldSubmitted: (value) {
                             if (cnpjController.text.isNotEmpty) {
                               _fetchCompanyDetails(cnpjController.text);
@@ -218,10 +218,9 @@ class _AgendaTabSelectorState extends State<AgendaTab> {
                           validator: emailValidator,
                         ),
                         CustomTextField(
-                          controller: cepController,
-                          icon: Icons.location_on,
-                          label: 'CEP:'                            
-                        ),
+                            controller: cepController,
+                            icon: Icons.location_on,
+                            label: 'CEP:'),
                         CustomTextField(
                           controller: enderecoController,
                           icon: Icons.location_on,
@@ -248,10 +247,9 @@ class _AgendaTabSelectorState extends State<AgendaTab> {
                           label: 'Estado',
                         ),
                         CustomTextField(
-                          controller: telefoneController,
-                          icon: Icons.phone,
-                          label: 'Telefone:'                          
-                        ),
+                            controller: telefoneController,
+                            icon: Icons.phone,
+                            label: 'Telefone:'),
                       ],
                     ),
                   ),

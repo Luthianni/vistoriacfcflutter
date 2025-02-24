@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:vistoria_cfc/src/pages/auth/view/sign_in_screen.dart';
-import 'package:vistoria_cfc/src/pages/base/base_screen.dart';
 import 'package:vistoria_cfc/src/pages/base/binding/navigation_binding.dart';
+import 'package:vistoria_cfc/src/pages/base/view/base_screen.dart';
 import 'package:vistoria_cfc/src/pages/home/binding/home_binding.dart';
 import 'package:vistoria_cfc/src/pages/profile/binding/profile_binding.dart';
 import 'package:vistoria_cfc/src/pages/splash/splash_screen.dart';

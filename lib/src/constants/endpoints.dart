@@ -1,8 +1,8 @@
 // CONNECTION BACK-END //
-//const String baseUrl = 'http://192.168.0.200:8080/api/v1';
-const String baseUrl = 'http://localhost:8080';
+// const String baseUrl = 'http://192.168.0.200:8080';
+// const String baseUrl = 'http://localhost:8080';
 //const String baseUrl = 'http://172.25.137.54:8080/api/v1';
-// const String baseUrl = 'https://9790-177-22-40-250.ngrok-free.app';
+const String baseUrl = 'https://529e-177-22-40-232.ngrok-free.app';
 
 abstract class Endpoints {
   // AUTH //

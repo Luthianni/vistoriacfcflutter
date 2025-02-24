@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 
@@ -17,6 +16,8 @@ class HttpManager {
 
   HttpManager() : _dio = Dio() {
     _initializeInterceptors();
+    _dio.options.connectTimeout = 10000; // 10 segundos
+    _dio.options.receiveTimeout = 10000; // 10 segundos
   }
 
   void _initializeInterceptors() {
@@ -41,9 +42,11 @@ class HttpManager {
           errorDetails.writeln('Status Code: ${e.response?.statusCode}');
           errorDetails.writeln('Mensagem: ${e.message}');
           errorDetails.writeln('Dados da Resposta: ${e.response?.data}');
-          errorDetails.writeln('Headers da Requisição: ${e.requestOptions.headers}');
-          
-          logger.e(errorDetails.toString(), error: e.error, stackTrace: e.stackTrace);
+          errorDetails
+              .writeln('Headers da Requisição: ${e.requestOptions.headers}');
+
+          logger.e(errorDetails.toString(),
+              error: e.error, stackTrace: e.stackTrace);
           return handler.next(e);
         },
       ),
@@ -128,7 +131,7 @@ class HttpManager {
 
   String _handleResponseError(Response? response) {
     if (response == null) return 'Erro na resposta do servidor';
-    
+
     switch (response.statusCode) {
       case 400:
         return 'Requisição inválida';
